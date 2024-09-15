@@ -1,0 +1,22 @@
+.glowingBackdrop {
+  @apply absolute
+    -left-20
+    -top-20
+    -z-10
+    size-full
+    opacity-50
+    md:opacity-100;
+
+  &::after {
+    @apply absolute
+      inset-0
+      m-auto
+      aspect-square
+      h-[448px]
+      w-[503px]
+      rounded-full
+      bg-[#406187]
+      blur-[175px]
+      content-[''];
+  }
+}
