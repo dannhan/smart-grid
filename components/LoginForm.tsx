@@ -15,8 +15,8 @@ import { Label } from "@/components/shadcn/label";
 
 const LoginForm: FC = () => {
   return (
-    <Card className="w-full sm:min-w-[420px]">
-      <CardHeader className="text-center py-12 gap-8">
+    <Card className="w-full border-none shadow-none sm:min-w-[420px]">
+      <CardHeader className="gap-8 py-12 text-center">
         <CardTitle className="text-6xl text-secondary-foreground">
           Login
         </CardTitle>
@@ -49,11 +49,16 @@ const LoginForm: FC = () => {
           />
         </div>
       </CardContent>
-      <CardFooter className="sm:px-14 pb-20">
-        <Button variant="secondary" className="w-full uppercase text-xl font-bold p-2">Login</Button>
+      <CardFooter className="pb-20 sm:px-14">
+        <Button
+          variant="secondary"
+          className="w-full p-2 text-xl font-bold uppercase"
+        >
+          Login
+        </Button>
       </CardFooter>
     </Card>
   );
-}
+};
 
 export default LoginForm;
