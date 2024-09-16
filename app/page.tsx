@@ -1,101 +1,83 @@
-import Image from "next/image";
+import { Lato } from "next/font/google";
 
-export default function Home() {
+import { cn } from "@/lib/utils"
+
+import { UserIcon, KeyIcon } from "lucide-react";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
+import { Label } from "@/components/shadcn/label";
+
+import GlowingBackdrop from "@/components/Common/GlowingBackdrop";
+
+const lato = Lato({ weight: ["100", "300", "400", "700", "900"], subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+
+export const description =
+  "A login page with two columns. The first column has the login form with email and password. There's a Forgot your passwork link and a link to sign up if you do not have an account. The second column has a cover image.";
+
+export default function Page() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className={cn("min-h-screen bg-red-200 h-full flex items-center justify-center", lato.className)}>
+      <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 bg-black">
+        <GlowingBackdrop />
+        <div className="hidden lg:block"></div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="flex items-center justify-center py-12">
+          <LoginForm />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
+  );
+}
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn/card";
+
+function LoginForm() {
+  return (
+    <Card className="w-full max-w-sm">
+      <CardHeader className="text-center py-12 gap-8">
+        <CardTitle className="text-6xl text-secondary-foreground">
+          Login
+        </CardTitle>
+        <CardDescription className="flex flex-col text-base font-semibold text-secondary-foreground">
+          <span className="leading-4">Selamat Datang</span>
+          <span className="leading-4">Silahkan Masukkan kredensial anda</span>
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+        <div className="relative w-full">
+          <Label htmlFor="username" className="sr-only">
+            Username
+          </Label>
+          <UserIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            id="username"
+            placeholder="username"
+            className="w-full appearance-none bg-background pl-8 shadow-none placeholder:italic"
+          />
+        </div>
+        <div className="relative w-full">
+          <Label htmlFor="password" className="sr-only">
+            Password
+          </Label>
+          <KeyIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            id="password"
+            placeholder="password"
+            className="w-full appearance-none bg-background pl-8 shadow-none placeholder:italic"
+          />
+        </div>
+      </CardContent>
+      <CardFooter className="pb-12">
+        <Button variant="secondary" className="w-full uppercase text-xl font-extrabold p-2">Login</Button>
+      </CardFooter>
+    </Card>
   );
 }

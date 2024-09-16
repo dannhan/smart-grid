@@ -1,21 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import type { FC, PropsWithChildren } from "react";
-
-import BaseLayout from "@/layouts/Base";
 
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import BaseLayout from "@/layouts/Base";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,8 +12,8 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => (
   <html lang="en">
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      {children}
+    <body className="antialiased">
+      <BaseLayout>{children}</BaseLayout>
     </body>
   </html>
 );
