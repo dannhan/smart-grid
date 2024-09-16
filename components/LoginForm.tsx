@@ -13,12 +13,9 @@ import {
 import { Input } from "@/components/shadcn/input";
 import { Label } from "@/components/shadcn/label";
 
-export const description =
-  "A simple login form with email and password. The submit button says 'Sign in'.";
-
 const LoginForm: FC = () => {
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full sm:min-w-[420px]">
       <CardHeader className="text-center py-12 gap-8">
         <CardTitle className="text-6xl text-secondary-foreground">
           Login
@@ -28,7 +25,7 @@ const LoginForm: FC = () => {
           <span className="leading-4">Silahkan Masukkan kredensial anda</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4">
+      <CardContent className="grid gap-4 sm:px-14">
         <div className="relative w-full">
           <Label htmlFor="username" className="sr-only">
             Username
@@ -52,8 +49,8 @@ const LoginForm: FC = () => {
           />
         </div>
       </CardContent>
-      <CardFooter className="pb-12">
-        <Button variant="secondary" className="w-full uppercase text-xl font-extrabold p-2">Login</Button>
+      <CardFooter className="sm:px-14 pb-20">
+        <Button variant="secondary" className="w-full uppercase text-xl font-bold p-2">Login</Button>
       </CardFooter>
     </Card>
   );

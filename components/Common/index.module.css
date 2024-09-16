@@ -12,8 +12,10 @@
       inset-0
       m-auto
       aspect-square
-      h-[448px]
-      w-[503px]
+      h-full
+      w-full
+      sm:h-[448px]
+      sm:w-[503px]
       rounded-full
       bg-[#406187]
       blur-[175px]

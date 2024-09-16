@@ -9,15 +9,22 @@ const LoginPage: NextPage = () => {
     <CenteredLayout>
       <GlowingBackdrop />
 
-      <main className="flex w-full items-center justify-center gap-7 md:flex-row md:gap-14 xl:gap-28 2xl:gap-32">
-        <section className="flex-1">
-          <h1 className="text-4xl font-bold">
-            <span>Smart</span>
-            <span>Grid</span>
-          </h1>
+      <main className="flex w-full max-w-screen-xl flex-row items-center justify-around gap-8 text-secondary-foreground">
+        <section className="hidden flex-col justify-center lg:flex">
+          <img src="/logo.png" className="max-w-[500px]" />
+          <div className="-mt-2 space-y-2 pl-28 font-medium">
+            <p>
+              Selamat Datang di Dashboard Smart
+              <span className="text-[#F2DF0F]">Grid</span> Anda
+            </p>
+            <p>
+              Kontrol dan pantau bangunan <br />
+              <strong>mudah aman</strong> dan <strong>pintar</strong>!
+            </p>
+          </div>
         </section>
 
-        <section className="flex-1">
+        <section className="flex w-full justify-center sm:w-auto">
           <LoginForm />
         </section>
       </main>
