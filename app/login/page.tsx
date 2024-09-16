@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Image from "next/image";
 
 import LoginForm from "@/components/LoginForm";
 import GlowingBackdrop from "@/components/Common/GlowingBackdrop";
@@ -9,18 +10,17 @@ const LoginPage: NextPage = () => {
     <CenteredLayout>
       <GlowingBackdrop />
 
-      <main className="flex w-full max-w-screen-xl flex-col items-center justify-around gap-8 text-secondary-foreground lg:flex-row">
+      <main className="flex h-svh w-full max-w-screen-xl flex-col items-center justify-around gap-8 text-secondary-foreground lg:flex-row">
         <section className="flex flex-col justify-center">
-          <img
-            src="/logo.png"
-            className="w-full max-w-[380px] lg:max-w-[500px]"
-          />
+          <div className="relative aspect-[469/114] w-screen max-w-[380px] object-contain lg:max-w-[500px]">
+            <Image alt="Smart Grid Logo" src="/logo.png" fill />
+          </div>
           <div className="-mt-2 hidden space-y-2 pl-28 font-medium lg:block">
             <p>
               Selamat Datang di Dashboard Smart
               <span className="text-[#F2DF0F]">Grid</span> Anda
             </p>
-            <p>
+            <p className="leading-5">
               Kontrol dan pantau bangunan <br />
               <strong>mudah aman</strong> dan <strong>pintar</strong>!
             </p>
