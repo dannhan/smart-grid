@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import Link from "next/link";
 
 import { UserIcon, KeyIcon } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
@@ -53,8 +54,9 @@ const LoginForm: FC = () => {
         <Button
           variant="secondary"
           className="w-full p-2 text-xl font-bold uppercase"
+          asChild
         >
-          Login
+          <Link href="/dashboard">Login</Link>
         </Button>
       </CardFooter>
     </Card>

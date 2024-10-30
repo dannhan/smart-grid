@@ -2,22 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* TODO: popover, popover-foreground, primary-forefround, muted */
+
 @layer base {
   :root {
     --background: 203 20% 92%;
-    /* todo */ --foreground: 222.2 84% 4.9%;
+    --foreground: 212 36% 39%;
     --card: 240 27% 98%;
-    /* todo */ --card-foreground: 222.2 84% 4.9%;
-    /* todo */ --popover: 0 0% 100%;
-    /* todo */ --popover-foreground: 222.2 84% 4.9%;
-    --primary: 212 51% 31%;
-    /* todo */ --primary-foreground: 210 40% 98%;
-
-
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 212 36% 39%;
+    --primary-foreground: 210 40% 98%;
     --secondary: 203 20% 92%;
     --secondary-foreground: 212 36% 39%;
-
-    /* todo: */
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
