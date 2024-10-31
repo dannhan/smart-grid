@@ -15,7 +15,7 @@ import { dashboardInfoItems } from "@/lib/config";
 
 const DashboardPage: FC = () => {
   return (
-    <main className="flex flex-1 flex-col gap-8 px-4">
+    <main className="flex flex-1 flex-col gap-8 px-4 py-8">
       <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
         {/* TODO: href */}
         {dashboardInfoItems.map((item) => (

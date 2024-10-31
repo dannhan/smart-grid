@@ -72,3 +72,5 @@ export const dashboardInfoItems = [
     icon: Flame,
   },
 ];
+
+export const controlRooms = ["Room A", "Room B", "Room C", "Room D"];
