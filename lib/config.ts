@@ -1,4 +1,11 @@
-import { Home, Joystick, Monitor, Newspaper, History } from "lucide-react";
+import {
+  Home,
+  Joystick,
+  Monitor,
+  Newspaper,
+  History,
+  Settings,
+} from "lucide-react";
 
 import Amperemeter from "@/components/Icon/Amperemeter";
 import Flame from "@/components/Icon/Flame";
@@ -30,6 +37,11 @@ export const sidenavItems = [
     title: "History",
     url: "/dashboard/history",
     icon: History,
+  },
+  {
+    title: "Settings",
+    url: "/dashboard/settings",
+    icon: Settings,
   },
 ];
 

@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import Link from "next/link";
 
 import { ChevronRightIcon } from "lucide-react";
@@ -8,13 +9,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
+import { ChartComponent } from "@/components/BarChart";
 
 import { dashboardInfoItems } from "@/lib/config";
 
-const DashboardPage = () => {
+const DashboardPage: FC = () => {
   return (
     <main className="flex flex-1 flex-col gap-8 px-4">
-      <div className="gap grid h-full w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
+      <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
         {/* TODO: href */}
         {dashboardInfoItems.map((item) => (
           <Link href={"#"} key={item.title}>
@@ -37,10 +39,9 @@ const DashboardPage = () => {
           </Link>
         ))}
       </div>
-      <Card className="h-full w-full" />
+      <ChartComponent />
     </main>
   );
 };
 
 export default DashboardPage;
-

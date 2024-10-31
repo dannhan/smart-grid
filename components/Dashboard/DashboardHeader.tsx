@@ -13,8 +13,8 @@ import DashboardHeaderClock from "@/components/Dashboard/DashboardHeaderClock";
 
 const DashboardHeader: FC = () => {
   return (
-    <div className="hidden rounded-b-2xl bg-card shadow md:block">
-      <Header className="mx-auto w-full max-w-screen-xl bg-transparent shadow-none md:flex">
+    <Header className="sticky top-0 z-50 w-full rounded-b-2xl">
+      <section className="mx-auto hidden h-full max-w-screen-xl items-center justify-between md:flex">
         <div className="flex items-center gap-8">
           <Image
             alt="Smart Grid Logo"
@@ -34,8 +34,8 @@ const DashboardHeader: FC = () => {
             <LogOutIcon strokeWidth={3.4} />
           </Link>
         </div>
-      </Header>
-    </div>
+      </section>
+    </Header>
   );
 };
 
