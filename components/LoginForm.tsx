@@ -57,7 +57,7 @@ const LoginForm: FC = () => {
           className="w-full p-2 text-xl font-bold uppercase"
           asChild
         >
-          <Link href="/dashboard">Login</Link>
+          <Link href="/dashboard/home">Login</Link>
         </Button>
       </CardFooter>
     </Card>
