@@ -9,7 +9,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => (
     <DashboardHeader />
     <div className="mx-auto flex w-full max-w-screen-xl flex-1 justify-between">
       <DashboardSidenav />
-      <div className="py-8">{children}</div>
+      {children}
       <DashboardSideinfo />
     </div>
   </>
