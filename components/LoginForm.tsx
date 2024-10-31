@@ -46,6 +46,7 @@ const LoginForm: FC = () => {
           <Input
             id="password"
             placeholder="password"
+            type="password"
             className="w-full appearance-none bg-background pl-8 shadow-none placeholder:italic"
           />
         </div>
