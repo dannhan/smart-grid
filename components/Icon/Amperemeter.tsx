@@ -12,7 +12,7 @@ const Amperemeter: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
       cy={254}
       r={254}
       style={{
-        fill: "#516F91",
+        fill: "#879CB3",
       }}
     />
     <path
