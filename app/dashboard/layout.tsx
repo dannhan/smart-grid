@@ -1,14 +1,16 @@
 import type { FC, PropsWithChildren } from "react";
 
 import DashboardHeader from "@/components/Dashboard/DashboardHeader";
-import DashboardSidebar from "@/components/Dashboard/DashboardSidebar";
+import DashboardSidenav from "@/components/Dashboard/DashboardSidenav";
+import DashboardSideinfo from "@/components/Dashboard/DashboardSideinfo";
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => (
-  <div className="flex flex-col">
+  <div className="flex min-h-screen flex-col">
     <DashboardHeader />
-    <div className="flex flex-1 py-4">
-      <DashboardSidebar />
+    <div className="mx-auto flex w-full max-w-screen-xl flex-1 justify-between py-8">
+      <DashboardSidenav />
       {children}
+      <DashboardSideinfo />
     </div>
   </div>
 );
