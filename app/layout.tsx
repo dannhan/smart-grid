@@ -1,9 +1,15 @@
 import type { FC, PropsWithChildren } from "react";
 import type { Metadata } from "next";
+import { Lato } from "next/font/google";
 
 import "./globals.css";
 
 import BaseLayout from "@/layouts/Base";
+
+const lato = Lato({
+  weight: ["100", "300", "400", "700", "900"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,7 +18,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => (
   <html lang="en">
-    <body className="antialiased">
+    <body className={`${lato.className} antialiased`}>
       <BaseLayout>{children}</BaseLayout>
     </body>
   </html>

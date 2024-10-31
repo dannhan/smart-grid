@@ -14,10 +14,10 @@ const DashboardSidenav: FC = () => {
                 asChild
                 variant="ghost"
                 size="lg"
-                className="w-full justify-start rounded-lg rounded-l-none text-foreground transition-colors hover:bg-primary hover:text-primary-foreground xl:rounded-l-lg"
+                className="w-full justify-start rounded-lg rounded-l-none font-semibold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground xl:rounded-l-lg"
               >
                 <a href={item.url}>
-                  <item.icon className="size-4 shrink-0" />
+                  <item.icon className="size-4 shrink-0" strokeWidth={2.3} />
                   <span className="truncate">{item.title}</span>
                 </a>
               </Button>
