@@ -11,7 +11,6 @@ import {
 import Header from "@/components/Common/Header";
 import DashboardHeaderClock from "@/components/Dashboard/DashboardHeaderClock";
 
-// TODO: active link, font
 const DashboardHeader: FC = () => {
   return (
     <div className="hidden rounded-b-2xl bg-card shadow md:block">
