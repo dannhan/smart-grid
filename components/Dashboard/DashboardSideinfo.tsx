@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/shadcn/scroll-area";
 
 const DashboardSideinfo: FC = () => {
   return (
-    <aside className="sticky top-16 h-[calc(100svh-4rem)] w-80 py-8">
+    <aside className="sticky top-16 hidden h-[calc(100svh-4rem)] w-80 py-8 md:block">
       {/* TODO: is scrollarea necessary? */}
       <ScrollArea className="h-full w-full flex-col rounded-md pr-2">
         <Card className="h-72" />
