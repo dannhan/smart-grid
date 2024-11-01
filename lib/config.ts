@@ -73,4 +73,4 @@ export const dashboardInfoItems = [
   },
 ];
 
-export const controlRooms = ["Room A", "Room B", "Room C", "Room D"];
+export const rooms = ["A", "B", "C", "D"];

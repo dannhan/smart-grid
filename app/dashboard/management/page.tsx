@@ -1,45 +1,43 @@
 import Link from "next/link";
 
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, Lightbulb } from "lucide-react";
+
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
+import { Switch } from "@/components/shadcn/switch";
+import OfficeBuildings from "@/components/Icon/OfficeBuildings";
 
-import { dashboardInfoItems } from "@/lib/config";
+import { rooms } from "@/lib/config";
 
-const DashboardPage = () => {
+const ControlPage = () => {
   return (
-    <main className="flex flex-1 flex-col gap-8 px-4">
-      <div className="gap grid h-full w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
+    <main className="flex flex-1 flex-col gap-8 px-4 py-8">
+      <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
         {/* TODO: href */}
-        {dashboardInfoItems.map((item) => (
-          <Link href={"#"} key={item.title}>
-            <Card className="relative font-bold">
-              <CardHeader className="px-5 pb-0 pt-4">
-                <CardTitle className="text-2xl">{item.title}</CardTitle>
+        {rooms.map((room) => (
+          <Link href={"#"} key={room}>
+            <Card className="relative">
+              <CardHeader className="px-5 py-4">
+                <CardTitle className="text-2xl">Room</CardTitle>
                 <ChevronRightIcon
                   className="absolute right-4 top-3 size-5"
                   strokeWidth={2.5}
                 />
               </CardHeader>
-              <CardContent className="flex items-center justify-between px-5 pb-0 text-xl">
-                <div>{item.value}</div>
-                <div className="size-14">
-                  <item.icon />
-                </div>
+              <CardContent className="flex justify-around gap-4 px-5 text-xl">
+                <p className="text-7xl font-bold">{room}</p>
+                <OfficeBuildings />
               </CardContent>
-              <CardFooter className="px-5 pb-5 text-sm">{item.unit}</CardFooter>
             </Card>
           </Link>
         ))}
       </div>
-      <Card className="h-full w-full" />
     </main>
   );
 };
 
-export default DashboardPage;
+export default ControlPage;
