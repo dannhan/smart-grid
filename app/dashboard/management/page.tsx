@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ChevronRightIcon, Lightbulb } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 
 import {
   Card,
@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import { Switch } from "@/components/shadcn/switch";
 import OfficeBuildings from "@/components/Icon/OfficeBuildings";
 
 import { rooms } from "@/lib/config";

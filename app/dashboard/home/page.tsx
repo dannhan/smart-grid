@@ -22,7 +22,9 @@ const DashboardPage: FC = () => {
           <Link href={"#"} key={item.title}>
             <Card className="relative font-bold">
               <CardHeader className="px-5 pb-0 pt-4">
-                <CardTitle className="text-2xl">{item.title}</CardTitle>
+                <CardTitle className="text-2xl font-bold">
+                  {item.title}
+                </CardTitle>
                 <ChevronRightIcon
                   className="absolute right-4 top-3 size-5"
                   strokeWidth={2.5}

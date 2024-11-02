@@ -1,6 +1,6 @@
-import Link from "next/link";
+import type { FC } from "react";
 
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -8,38 +8,52 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/shadcn/dropdown-menu";
+import { Button } from "@/components/shadcn/button";
+import Pdf from "@/components/Icon/Pdf";
+import Csv from "@/components/Icon/Csv";
 
-import { dashboardInfoItems } from "@/lib/config";
-
-const DashboardPage = () => {
+const HistoryPage: FC = () => {
   return (
-    <main className="flex flex-1 flex-col gap-8 px-4">
-      <div className="gap grid h-full w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
-        {/* TODO: href */}
-        {dashboardInfoItems.map((item) => (
-          <Link href={"#"} key={item.title}>
-            <Card className="relative font-bold">
-              <CardHeader className="px-5 pb-0 pt-4">
-                <CardTitle className="text-2xl">{item.title}</CardTitle>
-                <ChevronRightIcon
-                  className="absolute right-4 top-3 size-5"
-                  strokeWidth={2.5}
-                />
-              </CardHeader>
-              <CardContent className="flex items-center justify-between px-5 pb-0 text-xl">
-                <div>{item.value}</div>
-                <div className="size-14">
-                  <item.icon />
-                </div>
-              </CardContent>
-              <CardFooter className="px-5 pb-5 text-sm">{item.unit}</CardFooter>
-            </Card>
-          </Link>
-        ))}
-      </div>
-      <Card className="h-full w-full" />
+    <main className="flex flex-1 flex-col gap-8 px-4 py-8">
+      <Card className="overflow-hidden border-2 border-primary">
+        <CardHeader className="bg-primary p-1 text-center text-primary-foreground">
+          <CardTitle className="text-2xl font-bold">
+            Repairs & Changes History
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="h-96"></CardContent>
+        <CardFooter>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="relative w-full font-semibold">
+                <span>Print</span>
+                <ChevronDownIcon className="absolute right-3" strokeWidth={3} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="rounded-xl border-2 border-primary"
+            >
+              <DropdownMenuItem className="items-center">
+                <Pdf />
+                <span>PDF</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="items-center">
+                <Csv />
+                <span>CSV</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </CardFooter>
+      </Card>
     </main>
   );
 };
 
-export default DashboardPage;
+export default HistoryPage;

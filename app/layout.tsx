@@ -1,15 +1,10 @@
 import type { FC, PropsWithChildren } from "react";
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
 
 import "./globals.css";
+import { lato } from "./fonts";
 
 import BaseLayout from "@/layouts/Base";
-
-const lato = Lato({
-  weight: ["100", "300", "400", "700", "900"],
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
