@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import { ChartComponent } from "@/components/BarChart";
+import Chart from "@/components/BarChart";
 
 import { dashboardInfoItems } from "@/lib/config";
 
@@ -41,7 +41,7 @@ const DashboardPage: FC = () => {
           </Link>
         ))}
       </div>
-      <ChartComponent />
+      <Chart title="Power Consumption" />
     </main>
   );
 };
