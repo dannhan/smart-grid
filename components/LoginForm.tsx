@@ -18,10 +18,8 @@ const LoginForm: FC = () => {
   return (
     <Card className="w-full border-none shadow-none sm:min-w-[420px]">
       <CardHeader className="gap-8 py-12 text-center">
-        <CardTitle className="text-6xl text-secondary-foreground">
-          Login
-        </CardTitle>
-        <CardDescription className="flex flex-col text-base font-semibold text-secondary-foreground">
+        <CardTitle className="text-6xl">Login</CardTitle>
+        <CardDescription className="flex flex-col text-base font-semibold">
           <span className="leading-4">Selamat Datang</span>
           <span className="leading-4">Silahkan Masukkan kredensial anda</span>
         </CardDescription>
@@ -53,8 +51,8 @@ const LoginForm: FC = () => {
       </CardContent>
       <CardFooter className="pb-20 sm:px-14">
         <Button
-          variant="secondary"
-          className="w-full p-2 text-xl font-bold uppercase"
+          variant="outline"
+          className="w-full p-2 text-xl font-bold uppercase hover:bg-background/80 hover:text-foreground"
           asChild
         >
           <Link href="/dashboard/home">Login</Link>

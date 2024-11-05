@@ -9,8 +9,7 @@ const LoginPage: NextPage = () => {
   return (
     <CenteredLayout>
       <GlowingBackdrop />
-
-      <main className="flex h-svh w-full max-w-screen-xl flex-col items-center justify-around gap-8 text-secondary-foreground lg:flex-row">
+      <main className="flex h-svh w-full max-w-screen-xl flex-col items-center justify-around gap-8 lg:flex-row">
         <section className="flex flex-col justify-center">
           <div className="relative aspect-[469/114] w-screen max-w-[380px] object-contain lg:max-w-[500px]">
             <Image alt="Smart Grid Logo" src="/logo.png" fill />
@@ -26,7 +25,6 @@ const LoginPage: NextPage = () => {
             </p>
           </div>
         </section>
-
         <section className="flex w-full justify-center sm:w-auto">
           <LoginForm />
         </section>

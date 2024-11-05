@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TODO: popover, popover-foreground, primary-forefround, muted */
+/* TODO: popover, popover-foreground, primary-forefround, muted, secondary, secondary-foreground */
 
 @layer base {
   :root {
@@ -14,8 +14,8 @@
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 212 36% 39%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 203 20% 92%;
-    --secondary-foreground: 212 36% 39%;
+    --secondary: 211 22% 66%;
+    --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
