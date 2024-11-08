@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { Button } from "@/components/shadcn/button";
 import {
@@ -50,17 +50,23 @@ const Chart: React.FC<ChartProps> = ({ title }) => {
       <CardContent>
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[250px] w-full"
+          className="relative -left-3 aspect-auto h-[250px] w-full"
         >
           <BarChart
             accessibilityLayer
             data={chartData.slice(0, 40)}
             margin={{
-              left: 12,
+              left: 0,
               right: 12,
             }}
           >
             <CartesianGrid vertical={false} />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickCount={6}
+            />
             <XAxis
               dataKey="date"
               tickLine={false}
