@@ -5,3 +5,9 @@ export type History = {
   technical_specification: string;
   image: string;
 };
+
+export type Room = {
+  name: string;
+  lamp: number;
+  socket: number;
+};

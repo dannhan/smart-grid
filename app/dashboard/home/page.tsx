@@ -19,7 +19,7 @@ const DashboardPage: FC = () => {
       <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
         {/* TODO: href */}
         {dashboardInfoItems.map((item) => (
-          <Link href={"#"} key={item.title}>
+          <Link href="monitoring" key={item.title}>
             <Card className="relative font-bold">
               <CardHeader className="px-5 pb-0 pt-4">
                 <CardTitle className="text-2xl font-bold">
