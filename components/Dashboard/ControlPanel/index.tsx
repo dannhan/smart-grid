@@ -5,6 +5,7 @@ import { FC } from "react";
 import { useControlContext } from "@/providers/ControlProvider";
 import ControlCard from "./ControlCard";
 
+// TODO: better loading ui
 const ControlPanel: FC = () => {
   const { rooms, loading, error } = useControlContext();
 

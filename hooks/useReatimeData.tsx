@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ref, onValue, Database } from "firebase/database";
 
+// expand this hooks (you can also try to use firease-redux-library)
 function useRealtimeData<T>(db: Database, path: string) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);

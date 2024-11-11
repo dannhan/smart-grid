@@ -1,11 +1,11 @@
-import Chart from "@/components/BarChart";
+import { type FC } from "react";
 
-const MonitoringPage = () => {
+import MonitoringChart from "@/components/Dashboard/MonitorChart";
+
+const MonitoringPage: FC = () => {
   return (
     <main className="flex flex-1 flex-col gap-8 px-4 py-8">
-      <Chart title="Voltages" />
-      <Chart title="Current" />
-      <Chart title="Power Consumption" />
+      <MonitoringChart />
     </main>
   );
 };
