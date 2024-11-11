@@ -28,7 +28,7 @@ const ChartContent: React.FC<ChartContentProps> = ({ mode, tooltipLabel, data })
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-      <BarChart accessibilityLayer data={data[mode]}>
+      <BarChart accessibilityLayer data={data[mode]} className="relative -left-4">
         <CartesianGrid vertical={false} />
         <YAxis
           dataKey="value"

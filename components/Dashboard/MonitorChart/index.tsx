@@ -8,8 +8,9 @@ import ChartCard from "./ChartCard";
 
 import { db } from "@/lib/firebase/database";
 
+// TODO: path
 const MonitorChart: React.FC = () => {
-  const { data } = useRealtimeData<RawChartData>(db, "monitor/voltages");
+  const { data, loading } = useRealtimeData<RawChartData>(db, "monitor/voltages");
 
   const formattedData: FormattedChartData = data ? {
     realtime: Object?.entries(data.realtime).map(([id, datum]) => ({ id, ...datum })),
@@ -20,7 +21,7 @@ const MonitorChart: React.FC = () => {
   };
 
   return (
-    <ChartCard title="Voltages" data={formattedData} />
+    <ChartCard title="Voltages" data={formattedData} loading={loading} />
   );
 }
 

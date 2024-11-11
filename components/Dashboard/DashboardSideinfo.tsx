@@ -41,6 +41,7 @@ const DashboardSideinfo: FC = () => {
           </CardContent>
         </Card>
         <DashboardSideinfoQuickaccess />
+        <div className="py-1" />
       </ScrollArea>
     </aside>
   );
