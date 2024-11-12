@@ -25,8 +25,12 @@ const ChartCard: React.FC<ChartProps> = ({ title, data, loading }) => {
   return (
     <Card className="relative overflow-hidden">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-card/90 z-10">
-          <LoaderCircle className="animate-spin text-priary" size={60} strokeWidth={2.8} />
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-card/90">
+          <LoaderCircle
+            className="text-priary animate-spin"
+            size={60}
+            strokeWidth={2.8}
+          />
         </div>
       )}
 

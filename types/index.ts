@@ -19,8 +19,8 @@ export type ChartData = {
 };
 
 export type RawChartData = {
-  hourly: Record<string, Omit<ChartData, "id">>;
-  realtime: Record<string, Omit<ChartData, "id">>;
+  hourly: Record<string, Omit<ChartData, "id">> | undefined;
+  realtime: Record<string, Omit<ChartData, "id">> | undefined;
 };
 
 export type FormattedChartData = {

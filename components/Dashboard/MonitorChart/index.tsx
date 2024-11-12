@@ -8,21 +8,24 @@ import ChartCard from "./ChartCard";
 
 import { db } from "@/lib/firebase/database";
 
-// TODO: path
 const MonitorChart: React.FC = () => {
-  const { data, loading } = useRealtimeData<RawChartData>(db, "monitor/voltages");
+  // TODO: only fetch the last 24 data, might see:
+  // might see: https://github.com/CSFrequency/react-firebase-hooks/blob/master/database/README.md#uselist
+  const { data, loading } = useRealtimeData<RawChartData>(
+    db,
+    "monitor/voltages",
+  );
 
-  const formattedData: FormattedChartData = data ? {
-    realtime: Object?.entries(data.realtime).map(([id, datum]) => ({ id, ...datum })),
-    hourly: Object?.entries(data.hourly).map(([id, datum]) => ({ id, ...datum })),
-  } : {
-    realtime: [],
-    hourly: [],
+  const formattedData: FormattedChartData = {
+    realtime: data?.realtime
+      ? Object.entries(data?.realtime).map(([id, datum]) => ({ id, ...datum }))
+      : [],
+    hourly: data?.hourly
+      ? Object?.entries(data?.hourly).map(([id, datum]) => ({ id, ...datum }))
+      : [],
   };
 
-  return (
-    <ChartCard title="Voltages" data={formattedData} loading={loading} />
-  );
-}
+  return <ChartCard title="Voltages" data={formattedData} loading={loading} />;
+};
 
 export default MonitorChart;

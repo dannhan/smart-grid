@@ -6,7 +6,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig
+  type ChartConfig,
 } from "@/components/shadcn/chart";
 
 interface ChartContentProps {
@@ -15,7 +15,11 @@ interface ChartContentProps {
   data: FormattedChartData;
 }
 
-const ChartContent: React.FC<ChartContentProps> = ({ mode, tooltipLabel, data }) => {
+const ChartContent: React.FC<ChartContentProps> = ({
+  mode,
+  tooltipLabel,
+  data,
+}) => {
   const chartConfig = {
     tooltip: {
       label: tooltipLabel,
@@ -23,12 +27,16 @@ const ChartContent: React.FC<ChartContentProps> = ({ mode, tooltipLabel, data })
     chart: {
       label: "Value",
       color: "hsl(var(--chart-5))",
-    }
+    },
   } satisfies ChartConfig;
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-      <BarChart accessibilityLayer data={data[mode]} className="relative -left-4">
+      <BarChart
+        accessibilityLayer
+        data={data[mode]}
+        className="relative -left-4"
+      >
         <CartesianGrid vertical={false} />
         <YAxis
           dataKey="value"
@@ -45,10 +53,15 @@ const ChartContent: React.FC<ChartContentProps> = ({ mode, tooltipLabel, data })
           axisLine={false}
         />
         <ChartTooltip content={<ChartTooltipContent nameKey="tooltip" />} />
-        <Bar dataKey="value" fill={`var(--color-chart)`} radius={4} isAnimationActive={false} />
+        <Bar
+          dataKey="value"
+          fill={`var(--color-chart)`}
+          radius={4}
+          isAnimationActive={false}
+        />
       </BarChart>
     </ChartContainer>
   );
-}
+};
 
 export default ChartContent;

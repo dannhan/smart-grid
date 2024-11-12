@@ -34,7 +34,7 @@ function useRealtimeData<T>(db: Database, path: string) {
         setData(null);
         setError(error.message);
         if (connected) setLoading(false);
-      }
+      },
     );
 
     return () => {
