@@ -1,7 +1,5 @@
 import type { FC } from "react";
 
-import { Lightbulb } from "lucide-react";
-
 import { Room } from "@/types";
 
 import {
@@ -14,6 +12,7 @@ import { Switch } from "@/components/shadcn/switch";
 
 import { useControlContext } from "@/providers/ControlProvider";
 import Socket from "@/components/Icon/Socket";
+import Lamp from "@/components/Icon/Lamp";
 
 interface ControlCardProps {
   roomId: string;
@@ -24,13 +23,13 @@ const ControlCard: FC<ControlCardProps> = ({ roomId, room }) => {
   const { toggleSwitch } = useControlContext();
 
   return (
-    <Card className="relative min-w-40">
+    <Card className="relative">
       <CardHeader className="px-5 py-4">
         <CardTitle className="text-2xl">{room.name}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 px-5 text-xl">
         <div className="flex items-center">
-          <Lightbulb className="mr-2 size-7" />
+          <Lamp className="mr-2 size-7" />
           <p className="text-2xl">Lamp</p>
           <Switch
             className="ml-auto"
