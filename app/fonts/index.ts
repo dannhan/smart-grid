@@ -1,6 +1,15 @@
 import localFont from "next/font/local";
 
 export const lato = localFont({
+  fallback: [
+    "ui-sans-serif",
+    "system-ui",
+    "sans-serif",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji",
+  ],
   src: [
     {
       path: "./Lato-Hairline.woff",
