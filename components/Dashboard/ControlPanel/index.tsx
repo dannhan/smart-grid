@@ -32,15 +32,17 @@ const ControlPanel: FC = () => {
 const LoadingUI: FC = () => {
   return (
     <div className="gap grid w-full grid-cols-2 grid-rows-2 justify-items-end gap-x-6 gap-y-6 xl:gap-x-12">
-      {Array(4).fill("").map((_, index) => (
-        <Skeleton
-          key={index}
-          className={cn(
-            "w-full max-w-80 bg-card h-[162px] rounded-xl border text-card-foreground shadow",
-            index % 2 === 0 && "justify-self-start",
-          )}
-        />
-      ))}
+      {Array(4)
+        .fill("")
+        .map((_, index) => (
+          <Skeleton
+            key={index}
+            className={cn(
+              "h-[162px] w-full max-w-80 rounded-xl border bg-card text-card-foreground shadow",
+              index % 2 === 0 && "justify-self-start",
+            )}
+          />
+        ))}
     </div>
   );
 };

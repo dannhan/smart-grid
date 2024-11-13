@@ -12,7 +12,7 @@ const LoginPage: NextPage = () => {
       <main className="flex h-svh w-full max-w-screen-xl flex-col items-center justify-around gap-8 lg:flex-row">
         <section className="flex flex-col justify-center">
           <div className="relative aspect-[469/114] w-screen max-w-[380px] object-contain lg:max-w-[500px]">
-            <Image alt="Smart Grid Logo" src="/logo.png" fill />
+            <Image alt="Smart Grid Logo" src="/logo.svg" fill />
           </div>
           <div className="-mt-2 hidden space-y-2 pl-28 font-medium lg:block">
             <p>

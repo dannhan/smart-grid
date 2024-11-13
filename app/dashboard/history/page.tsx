@@ -25,7 +25,7 @@ import { history } from "@/lib/config";
 
 const HistoryPage: FC = () => {
   return (
-    <main className="flex min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
+    <main className="flex min-h-screen min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <Card className="overflow-hidden border-2 border-primary">
         <CardHeader className="bg-primary p-1 text-center text-primary-foreground">
           <CardTitle className="text-2xl font-bold">

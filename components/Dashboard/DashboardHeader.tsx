@@ -18,7 +18,7 @@ const DashboardHeader: FC = () => {
         <div className="flex items-center gap-8">
           <Image
             alt="Smart Grid Logo"
-            src="/logo.png"
+            src="/logo.svg"
             height={450}
             width={105}
           />
