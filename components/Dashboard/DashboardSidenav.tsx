@@ -12,7 +12,7 @@ const DashboardSidenav: FC = () => {
   const segment = useSelectedLayoutSegment() || "";
 
   return (
-    <aside className="sticky top-16 hidden h-[calc(100svh-64px)] w-64 py-8 md:block">
+    <aside className="sticky top-16 hidden h-[calc(100svh-64px)] w-64 min-w-52 py-8 lg:block">
       <ul className="flex h-full flex-col gap-1 overflow-auto">
         {sidenavItems.map((item) => (
           <li
@@ -24,7 +24,7 @@ const DashboardSidenav: FC = () => {
               variant={item.url.endsWith(segment) ? "default" : "ghost"}
               size="lg"
               className={cn(
-                "w-full justify-start rounded-lg rounded-l-none font-semibold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground xl:rounded-l-lg",
+                "w-full justify-start rounded-lg rounded-l-none font-bold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground xl:rounded-l-lg",
                 item.url.endsWith(segment) && "text-primary-foreground",
               )}
             >

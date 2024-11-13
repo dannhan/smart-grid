@@ -15,7 +15,7 @@ import DashboardSideinfoQuickaccess from "./DashboardSideinfoQuickaccess";
 
 const DashboardSideinfo: FC = () => {
   return (
-    <aside className="sticky top-16 hidden h-[calc(100svh-4rem)] w-80 py-8 pr-2 md:block">
+    <aside className="sticky top-16 hidden h-[calc(100svh-4rem)] min-w-48 max-w-80 py-8 pr-2 md:block">
       {/* TODO: is scrollarea necessary? */}
       <ScrollArea className="mb-1 h-full w-full flex-col rounded-md pr-2">
         <Card className="min-h-72">

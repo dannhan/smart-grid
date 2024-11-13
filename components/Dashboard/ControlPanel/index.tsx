@@ -2,21 +2,43 @@
 
 import { FC } from "react";
 
+import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/shadcn/skeleton";
+
 import { useControlContext } from "@/providers/ControlProvider";
 import ControlCard from "./ControlCard";
 
-// TODO: better loading ui
 const ControlPanel: FC = () => {
   const { rooms, loading, error } = useControlContext();
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingUI />;
   if (error) return <div>Error: {error}</div>;
   if (!rooms) return <div>No data available</div>;
 
   return (
-    <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
-      {Object.entries(rooms).map(([roomId, room]) => (
-        <ControlCard key={roomId} roomId={roomId} room={room} />
+    <div className="gap grid w-full grid-cols-2 grid-rows-2 justify-items-end gap-x-6 gap-y-6 xl:gap-x-12">
+      {Object.entries(rooms).map(([roomId, room], index) => (
+        <ControlCard
+          key={roomId}
+          roomId={roomId}
+          room={room}
+          className={cn(index % 2 === 0 && "justify-self-start")}
+        />
+      ))}
+    </div>
+  );
+};
+
+const LoadingUI: FC = () => {
+  return (
+    <div className="gap grid w-full grid-cols-2 grid-rows-2 justify-items-end gap-x-6 gap-y-6 xl:gap-x-12">
+      {Array(4).fill("").map((_, index) => (
+        <Skeleton
+          className={cn(
+            "w-full max-w-80 bg-card h-[162px] rounded-xl border text-card-foreground shadow",
+            index % 2 === 0 && "justify-self-start",
+          )}
+        />
       ))}
     </div>
   );

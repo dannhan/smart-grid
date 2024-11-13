@@ -4,7 +4,7 @@ import MonitoringChart from "@/components/Dashboard/MonitorChart";
 
 const MonitoringPage: FC = () => {
   return (
-    <main className="flex flex-1 flex-col gap-8 px-4 py-8">
+    <main className="flex min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <MonitoringChart />
     </main>
   );

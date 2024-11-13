@@ -2,6 +2,7 @@ import type { FC } from "react";
 
 import { Room } from "@/types";
 
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -17,17 +18,18 @@ import Lamp from "@/components/Icon/Lamp";
 interface ControlCardProps {
   roomId: string;
   room: Room;
+  className?: string;
 }
 
-const ControlCard: FC<ControlCardProps> = ({ roomId, room }) => {
+const ControlCard: FC<ControlCardProps> = ({ roomId, room, className }) => {
   const { toggleSwitch } = useControlContext();
 
   return (
-    <Card className="relative">
+    <Card className={cn("relative w-full max-w-80", className)}>
       <CardHeader className="px-5 py-4">
         <CardTitle className="text-2xl">{room.name}</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4 px-5 text-xl">
+      <CardContent className="flex h-24 flex-col gap-2 px-5 text-xl">
         <div className="flex items-center">
           <Lamp className="mr-2 size-7" />
           <p className="text-2xl">Lamp</p>

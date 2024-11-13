@@ -14,12 +14,12 @@ import { rooms } from "@/lib/config";
 
 const ControlPage = () => {
   return (
-    <main className="flex flex-1 flex-col gap-8 px-4 py-8">
+    <main className="flex min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
         {/* TODO: href */}
         {rooms.map((room) => (
-          <Link href={"#"} key={room}>
-            <Card className="relative">
+          <Link href={"#"} key={room} className="relative">
+            <Card>
               <CardHeader className="px-5 py-4">
                 <CardTitle className="text-2xl">Room</CardTitle>
                 <ChevronRightIcon
@@ -27,7 +27,7 @@ const ControlPage = () => {
                   strokeWidth={2.5}
                 />
               </CardHeader>
-              <CardContent className="flex justify-around gap-4 px-5 text-xl">
+              <CardContent className="flex h-24 justify-around gap-4 px-5 text-xl">
                 <p className="text-7xl font-bold">{room}</p>
                 <OfficeBuildings />
               </CardContent>
