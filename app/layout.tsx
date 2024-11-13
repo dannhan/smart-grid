@@ -5,6 +5,7 @@ import "./globals.css";
 import { lato } from "./fonts";
 
 import BaseLayout from "@/layouts/Base";
+import TailwindIndicator from "@/components/TailwindIndicator";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +16,7 @@ const RootLayout: FC<PropsWithChildren> = async ({ children }) => (
   <html lang="en">
     <body className={`${lato.className} antialiased`}>
       <BaseLayout>{children}</BaseLayout>
+      <TailwindIndicator />
     </body>
   </html>
 );
