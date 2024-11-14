@@ -13,7 +13,7 @@ const MonitorChart: React.FC = () => {
   const { data, loading } = useRealtimeData<RawMetricsData>(
     db,
     "/monitor/",
-    250,
+    200,
   );
 
   const mapData = (data: Record<string, Measurement> | undefined) =>
@@ -41,13 +41,11 @@ const MonitorChart: React.FC = () => {
         data={formattedData.voltages}
         loading={loading}
       />
-      ;
       <ChartCard
         title={"Currents"}
         data={formattedData.currents}
         loading={loading}
       />
-      ;
       <ChartCard
         title={"Power Consumption"}
         data={formattedData.powers}
