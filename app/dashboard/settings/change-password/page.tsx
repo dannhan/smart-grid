@@ -32,8 +32,14 @@ const ChangePasswordPage: React.FC = () => {
               >
                 Old Password
               </Label>
-              <div className="flex items-center gap-3 font-semibold text-base">
-                : <Input id="repeat-password" type="password" required className="border-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold">
+                :{" "}
+                <Input
+                  id="repeat-password"
+                  type="password"
+                  required
+                  className="border-primary"
+                />
               </div>
             </div>
             <div className="grid grid-cols-[120px,1fr] items-center gap-4">
@@ -43,8 +49,14 @@ const ChangePasswordPage: React.FC = () => {
               >
                 New Password
               </Label>
-              <div className="flex items-center gap-3 font-semibold text-base">
-                : <Input id="repeat-password" type="password" required className="border-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold">
+                :{" "}
+                <Input
+                  id="repeat-password"
+                  type="password"
+                  required
+                  className="border-primary"
+                />
               </div>
             </div>
             <div className="grid grid-cols-[120px,1fr] items-center gap-4">
@@ -54,8 +66,14 @@ const ChangePasswordPage: React.FC = () => {
               >
                 Repeat New PW
               </Label>
-              <div className="flex items-center gap-3 font-semibold text-base">
-                : <Input id="repeat-password" type="password" required className="border-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold">
+                :{" "}
+                <Input
+                  id="repeat-password"
+                  type="password"
+                  required
+                  className="border-primary"
+                />
               </div>
             </div>
           </div>

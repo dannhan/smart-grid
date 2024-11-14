@@ -21,10 +21,10 @@ const ChangeAvatarPage: React.FC = () => {
             <XIcon className="size-5" strokeWidth="4" />
           </Link>
         </CardHeader>
-        <CardContent className="flex-1 w-full flex justify-center items-center">
-          <div className="rounded-2xl border-2 border-primary h-48 w-80 flex items-center flex-col justify-center text-secondary gap-2">
+        <CardContent className="flex w-full flex-1 items-center justify-center">
+          <div className="flex h-48 w-80 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-primary text-secondary">
             <ImageIcon className="size-24" strokeWidth="0.8" />
-            <p className="font-bold text-xl">upload an image</p>
+            <p className="text-xl font-bold">upload an image</p>
           </div>
         </CardContent>
         <CardFooter className="w-full">

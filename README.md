@@ -3,7 +3,8 @@
 ## TODO
 
 - [ ] keep an eye on sticky components:
-    - [ ] cannot use id to navigate properly, the header is fixed
+
+  - [ ] cannot use id to navigate properly, the header is fixed
 
 - [ ] add abstraction layer for sidebarinfo and sidebarnav (hoc, ref, whatever)
 - [ ] chart animation
