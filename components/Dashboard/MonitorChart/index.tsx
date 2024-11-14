@@ -3,17 +3,16 @@
 import * as React from "react";
 
 import { Measurement, RawMetricsData, ProcessedMetricsData } from "@/types";
-import useRealtimeData from "@/hooks/useReatimeData";
+import useRealtimeObject from "@/hooks/useReatimeObject";
 import ChartCard from "./ChartCard";
 
 import { db } from "@/lib/firebase/database";
 
 const MonitorChart: React.FC = () => {
-  // TODO: might see: https://github.com/CSFrequency/react-firebase-hooks/blob/master/database/README.md#uselist
-  const { data, loading } = useRealtimeData<RawMetricsData>(
+  const { data, loading } = useRealtimeObject<RawMetricsData>(
     db,
     "/monitor/",
-    200,
+    300,
   );
 
   const mapData = (data: Record<string, Measurement> | undefined) =>

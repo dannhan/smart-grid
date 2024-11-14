@@ -12,7 +12,7 @@ const DashboardSidenav: FC = () => {
   const segment = useSelectedLayoutSegment() || "";
 
   return (
-    <aside className="sticky top-16 hidden h-[calc(100svh-64px)] min-w-48 w-full max-w-64 py-8 md:block lg:w-64">
+    <aside className="sticky top-16 hidden h-[calc(100svh-64px)] w-full min-w-48 max-w-64 py-8 md:block lg:w-64">
       <ul className="flex h-full flex-col gap-1 overflow-auto">
         {sidenavItems.map((item) => (
           <li

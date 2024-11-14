@@ -5,7 +5,7 @@ import { ref, set } from "firebase/database";
 
 import type { Room } from "@/types";
 import { db } from "@/lib/firebase/database";
-import useRealtimeData from "@/hooks/useReatimeData";
+import useRealtimeObject from "@/hooks/useReatimeObject";
 
 // Define the shape of the context
 interface ControlContextType {
@@ -32,7 +32,7 @@ export const ControlProvider: FC<{ children: ReactNode }> = ({ children }) => {
     data: rooms,
     loading,
     error,
-  } = useRealtimeData<Record<string, Room>>(db, "control");
+  } = useRealtimeObject<Record<string, Room>>(db, "control");
 
   // Function to toggle the lamp or socket state
   const toggleSwitch = (roomId: string, field: "lamp" | "socket") => {
