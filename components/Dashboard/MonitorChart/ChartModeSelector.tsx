@@ -1,10 +1,11 @@
 import * as React from "react";
 
+import { TimeResolution } from "@/types";
 import { Button } from "@/components/shadcn/button";
 
 interface ChartModeProps {
-  activeChart: "realtime" | "hourly";
-  setActiveChart: React.Dispatch<React.SetStateAction<"realtime" | "hourly">>;
+  activeChart: TimeResolution;
+  setActiveChart: React.Dispatch<React.SetStateAction<TimeResolution>>;
 }
 
 const ChartMode: React.FC<ChartModeProps> = ({

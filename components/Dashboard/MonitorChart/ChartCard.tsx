@@ -1,26 +1,25 @@
 import * as React from "react";
 import { LoaderCircle } from "lucide-react";
 
-import { FormattedChartData } from "@/types";
+import { IdentifiedMeasurement, TimeResolution } from "@/types";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import ChartMode from "./ChartMode";
+import ChartModeSelector from "./ChartModeSelector";
 import ChartContent from "./ChartContent";
 
 interface ChartProps {
   title: string;
-  data: FormattedChartData;
+  data: { [Resolution in TimeResolution]: IdentifiedMeasurement[] };
   loading: boolean;
 }
 
 const ChartCard: React.FC<ChartProps> = ({ title, data, loading }) => {
-  const [activeChart, setActiveChart] = React.useState<"realtime" | "hourly">(
-    "realtime",
-  );
+  const [activeChart, setActiveChart] =
+    React.useState<TimeResolution>("realtime");
 
   return (
     <Card className="relative overflow-hidden">
@@ -36,7 +35,10 @@ const ChartCard: React.FC<ChartProps> = ({ title, data, loading }) => {
 
       <CardHeader className="flex flex-col items-stretch pb-0">
         <CardTitle className="text-2xl font-bold">{title}</CardTitle>
-        <ChartMode activeChart={activeChart} setActiveChart={setActiveChart} />
+        <ChartModeSelector
+          activeChart={activeChart}
+          setActiveChart={setActiveChart}
+        />
       </CardHeader>
       <CardContent>
         <ChartContent mode={activeChart} tooltipLabel={title} data={data} />

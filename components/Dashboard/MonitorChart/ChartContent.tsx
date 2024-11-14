@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import { FormattedChartData } from "@/types";
+import { IdentifiedMeasurement, TimeResolution } from "@/types";
 import {
   ChartContainer,
   ChartTooltip,
@@ -10,9 +10,9 @@ import {
 } from "@/components/shadcn/chart";
 
 interface ChartContentProps {
-  mode: "realtime" | "hourly";
+  mode: TimeResolution;
   tooltipLabel: string;
-  data: FormattedChartData;
+  data: { [Resolution in TimeResolution]: IdentifiedMeasurement[] };
 }
 
 const ChartContent: React.FC<ChartContentProps> = ({
@@ -31,10 +31,13 @@ const ChartContent: React.FC<ChartContentProps> = ({
   } satisfies ChartConfig;
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+    <ChartContainer
+      config={chartConfig}
+      className="h-[250px] min-h-[200px] w-full"
+    >
       <BarChart
         accessibilityLayer
-        data={data[mode]}
+        data={data[mode].slice(-24)}
         className="relative -left-4"
       >
         <CartesianGrid vertical={false} />

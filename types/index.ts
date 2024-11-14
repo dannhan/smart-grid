@@ -12,18 +12,25 @@ export type Room = {
   socket: number;
 };
 
-export type ChartData = {
-  id: string;
+export type MetricCategory = "voltage" | "current" | "power";
+
+export type Measurement = {
   time: string;
   value: number;
 };
 
-export type RawChartData = {
-  hourly: Record<string, Omit<ChartData, "id">> | undefined;
-  realtime: Record<string, Omit<ChartData, "id">> | undefined;
+export type IdentifiedMeasurement = Measurement & { id: string };
+
+export type TimeResolution = "realtime" | "hourly";
+
+export type RawMetricsData = {
+  [Category in MetricCategory as `${Category}s`]: {
+    [Resolution in TimeResolution]: Record<string, Measurement> | undefined;
+  };
 };
 
-export type FormattedChartData = {
-  hourly: ChartData[];
-  realtime: ChartData[];
+export type ProcessedMetricsData = {
+  [Category in MetricCategory as `${Category}s`]: {
+    [Resolution in TimeResolution]: IdentifiedMeasurement[];
+  };
 };
