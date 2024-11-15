@@ -24,7 +24,7 @@ const DashboardSidenav: FC = () => {
               variant={item.url.endsWith(segment) ? "default" : "ghost"}
               size="lg"
               className={cn(
-                "w-full justify-start rounded-lg rounded-l-none font-bold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground xl:rounded-l-lg",
+                "w-full justify-start rounded-md rounded-l-none font-bold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground xl:rounded-l-lg",
                 item.url.endsWith(segment) && "text-primary-foreground",
               )}
             >

@@ -2,6 +2,8 @@ import type { FC } from "react";
 import Link from "next/link";
 
 import { UserIcon, KeyIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/shadcn/button";
 import {
   Card,
@@ -14,11 +16,22 @@ import {
 import { Input } from "@/components/shadcn/input";
 import { Label } from "@/components/shadcn/label";
 
-const LoginForm: FC = () => {
+interface LoginFormProps {
+  className?: string;
+}
+
+const LoginForm: FC<LoginFormProps> = ({ className }) => {
   return (
-    <Card className="w-full border-none shadow-none sm:min-w-[420px]">
+    <Card
+      className={cn(
+        "w-full border-none shadow-none sm:min-w-[420px]",
+        className,
+      )}
+    >
       <CardHeader className="gap-8 py-12 text-center">
-        <CardTitle className="text-6xl">Login</CardTitle>
+        <CardTitle className="text-5xl font-extrabold sm:text-6xl">
+          Login
+        </CardTitle>
         <CardDescription className="flex flex-col text-base font-semibold">
           <span className="leading-4">Selamat Datang</span>
           <span className="leading-4">Silahkan Masukkan kredensial anda</span>
@@ -33,7 +46,7 @@ const LoginForm: FC = () => {
           <Input
             id="username"
             placeholder="username"
-            className="w-full appearance-none bg-background pl-8 shadow-none placeholder:italic"
+            className="w-full appearance-none border-none bg-slate-300 pl-8 shadow-none placeholder:italic sm:bg-background"
           />
         </div>
         <div className="relative w-full">
@@ -45,14 +58,14 @@ const LoginForm: FC = () => {
             id="password"
             placeholder="password"
             type="password"
-            className="w-full appearance-none bg-background pl-8 shadow-none placeholder:italic"
+            className="w-full appearance-none border-none bg-slate-300 pl-8 shadow-none placeholder:italic sm:bg-background"
           />
         </div>
       </CardContent>
       <CardFooter className="pb-20 sm:px-14">
         <Button
           variant="outline"
-          className="w-full p-2 text-xl font-bold uppercase hover:bg-background/80 hover:text-foreground"
+          className="w-full border-none bg-slate-300 p-2 text-xl font-black uppercase hover:bg-background/80 hover:text-foreground max-sm:hover:bg-slate-300/80 sm:bg-background"
           asChild
         >
           <Link href="/dashboard/home">Login</Link>
