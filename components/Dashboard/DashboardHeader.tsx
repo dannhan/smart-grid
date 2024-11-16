@@ -13,7 +13,7 @@ import DashboardHeaderClock from "@/components/Dashboard/DashboardHeaderClock";
 
 const DashboardHeader: FC = () => {
   return (
-    <Header className="sticky top-0 z-50 w-full rounded-b-2xl">
+    <Header className="sticky top-0 z-50 w-full rounded-b-2xl hidden sm:block">
       <section className="mx-auto flex h-full max-w-screen-xl items-center justify-between">
         <div className="flex items-center gap-8">
           <Image

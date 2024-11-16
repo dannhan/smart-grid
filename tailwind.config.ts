@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import type { PluginAPI } from "tailwindcss/types/config";
 
 const config: Config = {
   darkMode: ["class"],
@@ -58,6 +59,15 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        ".bg-primary-gradient": {
+          backgroundImage: "linear-gradient(to top, #406187, #33394D)",
+        },
+      });
+    },
+  ],
 };
 export default config;

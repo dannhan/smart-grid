@@ -1,19 +1,14 @@
 import type { FC, PropsWithChildren } from "react";
 
 import { ControlProvider } from "@/providers/ControlProvider";
-import DashboardHeader from "@/components/Dashboard/DashboardHeader";
-import DashboardSidenav from "@/components/Dashboard/DashboardSidenav";
-import DashboardSideinfo from "@/components/Dashboard/DashboardSideinfo";
+import DashboardLayout from "@/layouts/Dashboard";
 
-const DashboardLayout: FC<PropsWithChildren> = ({ children }) => (
+const Layout: FC<PropsWithChildren> = ({ children }) => (
   <ControlProvider>
-    <DashboardHeader />
-    <div className="mx-auto flex w-full max-w-screen-xl flex-1 justify-between">
-      <DashboardSidenav />
+    <DashboardLayout>
       {children}
-      <DashboardSideinfo />
-    </div>
+    </DashboardLayout>
   </ControlProvider>
 );
 
-export default DashboardLayout;
+export default Layout;

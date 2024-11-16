@@ -46,7 +46,7 @@ const LoginForm: FC<LoginFormProps> = ({ className }) => {
           <Input
             id="username"
             placeholder="username"
-            className="w-full appearance-none border-none bg-slate-300 pl-8 shadow-none placeholder:italic sm:bg-background"
+            className="w-full appearance-none border-none bg-[#cad4dd] pl-8 shadow-none placeholder:italic sm:bg-background"
           />
         </div>
         <div className="relative w-full">
@@ -58,14 +58,14 @@ const LoginForm: FC<LoginFormProps> = ({ className }) => {
             id="password"
             placeholder="password"
             type="password"
-            className="w-full appearance-none border-none bg-slate-300 pl-8 shadow-none placeholder:italic sm:bg-background"
+            className="w-full appearance-none border-none bg-[#cad4dd] pl-8 shadow-none placeholder:italic sm:bg-background"
           />
         </div>
       </CardContent>
       <CardFooter className="pb-20 sm:px-14">
         <Button
           variant="outline"
-          className="w-full border-none bg-slate-300 p-2 text-xl font-black uppercase hover:bg-background/80 hover:text-foreground max-sm:hover:bg-slate-300/80 sm:bg-background"
+          className="w-full border-none bg-[#cad4dd] p-2 text-xl font-black uppercase hover:bg-background/80 hover:text-foreground max-sm:hover:bg-[#cad4dd]/80 sm:bg-background"
           asChild
         >
           <Link href="/dashboard/home">Login</Link>
