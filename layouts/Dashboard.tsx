@@ -45,7 +45,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-screen-xl flex-1 justify-between">
+    <div className="mx-auto flex w-full max-w-screen-xl flex-1 flex-col justify-between">
       {children}
       <MobileNav path={path} />
     </div>

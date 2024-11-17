@@ -5,9 +5,7 @@ import DashboardLayout from "@/layouts/Dashboard";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => (
   <ControlProvider>
-    <DashboardLayout>
-      {children}
-    </DashboardLayout>
+    <DashboardLayout>{children}</DashboardLayout>
   </ControlProvider>
 );
 

@@ -35,8 +35,7 @@ const SensorStatus: React.FC = () => {
         title="Voltage"
         unit="Volts"
         icon={Voltmeter}
-        // className="order-first from-[#406187] to-[#33394D] max-sm:bg-gradient-to-t max-sm:text-white max-sm:shadow-[15px_20px_20px_0px_rgba(0,_0,_0,_0.15)]"
-        className="order-first max-sm:bg-primary-gradient max-sm:text-white max-sm:shadow-[15px_20px_20px_0px_rgba(0,_0,_0,_0.15)]"
+        className="order-first max-sm:text-white max-sm:shadow-[15px_20px_20px_0px_rgba(0,_0,_0,_0.15)] max-sm:bg-primary-gradient"
       >
         {(volt && volt[0].value) || ""}
       </SensorStatusCard>
@@ -46,7 +45,7 @@ const SensorStatus: React.FC = () => {
         icon={Amperemeter}
         className="sm:order-3"
       >
-        {current && current[0].value ? `≈ ${current[0].value}` : ""}
+        {current?.[0]?.value ? `≈ ${current[0].value}` : ""}
       </SensorStatusCard>
       <SensorStatusCard
         title="Flame"

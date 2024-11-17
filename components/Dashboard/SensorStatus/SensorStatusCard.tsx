@@ -27,28 +27,12 @@ const SensorStatusCard: React.FC<React.PropsWithChildren & Props> = ({
   children,
 }) => {
   return (
-    /* <Card className="relative w-full max-w-80 justify-self-start font-bold">
-      <Link
-        href="monitoring"
-        key={title}
-        className="absolute h-full w-full max-sm:hidden"
-      />
-      <CardHeader className="px-5 pb-0 pt-4">
-        <CardTitle className="text-2xl font-bold">{title}</CardTitle>
-        <ChevronRightIcon
-          className="absolute right-4 top-3 size-5 max-sm:hidden"
-          strokeWidth={2.5}
-        />
-      </CardHeader>
-      <CardContent className="flex h-[72px] items-center justify-between px-5 pb-0 text-xl">
-        <div>{children}</div>
-        <div className="size-14">
-          <Icon />
-        </div>
-      </CardContent>
-      <CardFooter className="h-10 px-5 pb-5 text-sm">{unit}</CardFooter>
-    </Card> */
-    <Card className={cn("relative w-full justify-self-start bg-neutral-200 max-sm:shadow-none sm:bg-card border-none", className)}>
+    <Card
+      className={cn(
+        "relative w-full justify-self-start border-none bg-neutral-200 max-sm:shadow-none sm:bg-card",
+        className,
+      )}
+    >
       <Link
         href="monitoring"
         key={title}
