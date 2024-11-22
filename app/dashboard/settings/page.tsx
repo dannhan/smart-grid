@@ -22,7 +22,7 @@ const SettingsPage: React.FC = () => {
     <main className="flex min-h-screen min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <Card className="flex h-96 w-full flex-col items-center justify-between rounded-xl">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Profile Settings</CardTitle>
+          <CardTitle>Profile Settings</CardTitle>
         </CardHeader>
         <CardContent>
           <Avatar className="relative size-40 overflow-visible">

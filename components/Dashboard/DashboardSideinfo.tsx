@@ -20,7 +20,7 @@ const DashboardSideinfo: FC = () => {
       <ScrollArea className="mb-1 h-full w-full flex-col rounded-md pr-2">
         <Card className="min-h-72">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 font-bold">
+            <CardTitle className="flex items-center gap-2 text-base">
               <Bell className="h-4 w-4" />
               <span>Notification</span>
             </CardTitle>

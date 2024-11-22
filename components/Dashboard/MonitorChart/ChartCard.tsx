@@ -34,7 +34,7 @@ const ChartCard: React.FC<ChartProps> = ({ title, data, loading }) => {
       )}
 
       <CardHeader className="flex flex-col items-stretch pb-0">
-        <CardTitle className="text-2xl font-bold">{title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
         <ChartModeSelector
           activeChart={activeChart}
           setActiveChart={setActiveChart}

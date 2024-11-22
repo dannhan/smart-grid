@@ -21,7 +21,7 @@ const DashboardSideinfoQuickaccess: FC = () => {
   return (
     <Card className="mt-8 min-h-72">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 font-bold">
+        <CardTitle className="flex items-center gap-2 text-base">
           <Touch className="size-4" />
           <span>Quick Access</span>
         </CardTitle>

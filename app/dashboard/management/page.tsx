@@ -21,7 +21,7 @@ const ControlPage = () => {
           <Link href={"#"} key={room} className="relative">
             <Card>
               <CardHeader className="px-5 py-4">
-                <CardTitle className="text-2xl">Room</CardTitle>
+                <CardTitle>Room</CardTitle>
                 <ChevronRightIcon
                   className="absolute right-4 top-3 size-5"
                   strokeWidth={2.5}

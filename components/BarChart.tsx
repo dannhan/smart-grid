@@ -29,7 +29,7 @@ const Chart: React.FC<ChartProps> = ({ title }) => {
   return (
     <Card>
       <CardHeader className="flex flex-col items-stretch pb-0">
-        <CardTitle className="text-2xl font-bold">{title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
         <div className="flex w-full justify-around gap-4 py-2">
           {["desktop", "mobile"].map((key) => {
             const chart = key as keyof typeof chartConfig;
@@ -100,7 +100,7 @@ const Chart: React.FC<ChartProps> = ({ title }) => {
               dataKey={activeChart}
               fill={`var(--color-${activeChart})`}
               radius={[2, 2, 2, 2]} // Add rounded corners (top-left, top-right, bottom-right, bottom-left)
-              // barSize={8} // Consistent slim width
+            // barSize={8} // Consistent slim width
             />
           </BarChart>
         </ChartContainer>

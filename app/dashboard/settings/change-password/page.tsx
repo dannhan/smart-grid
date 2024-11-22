@@ -18,7 +18,7 @@ const ChangePasswordPage: React.FC = () => {
     <main className="flex min-h-screen min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <Card className="flex h-96 w-full flex-col items-center justify-between rounded-xl">
         <CardHeader className="relative w-full text-center">
-          <CardTitle className="text-2xl font-bold">Change Password</CardTitle>
+          <CardTitle>Change Password</CardTitle>
           <Link href="/dashboard/settings" className="absolute right-6 top-6">
             <XIcon className="size-5" strokeWidth="4" />
           </Link>

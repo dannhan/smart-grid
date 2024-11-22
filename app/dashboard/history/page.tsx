@@ -28,9 +28,7 @@ const HistoryPage: FC = () => {
     <main className="flex min-h-screen min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <Card className="overflow-hidden border-2 border-primary">
         <CardHeader className="bg-primary p-1 text-center text-primary-foreground">
-          <CardTitle className="text-2xl font-bold">
-            Repairs &amp; Changes History
-          </CardTitle>
+          <CardTitle>Repairs &amp; Changes History</CardTitle>
         </CardHeader>
         <CardContent className="py-6">
           <HistoryTable columns={columns} data={history} />
