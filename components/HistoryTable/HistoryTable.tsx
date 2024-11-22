@@ -47,9 +47,9 @@ const HistoryTable = <TData, TValue>({
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                   </TableHead>
                 );
               })}
@@ -68,10 +68,12 @@ const HistoryTable = <TData, TValue>({
                     key={cell.id}
                     className={cn(
                       "border-2 border-primary text-center",
-                      cell.column.id === "date" && "w-28",
-                      cell.column.id === "description" && "w-32",
-                      cell.column.id === "action_type" && "w-28",
-                      cell.column.id === "technical_specification" && "w-36",
+                      cell.column.id === "date" && "min-w-28",
+                      cell.column.id === "name" && "min-w-24",
+                      cell.column.id === "action_type" && "min-w-[100px]",
+                      cell.column.id === "description" && "min-w-32",
+                      cell.column.id === "technical_specification" && "w-28",
+                      cell.column.id === "image" && "min-w-20",
                     )}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

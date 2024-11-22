@@ -9,6 +9,10 @@ export const columns: ColumnDef<History>[] = [
     header: "Date",
   },
   {
+    accessorKey: "component",
+    header: "Component",
+  },
+  {
     accessorKey: "action_type",
     header: "Action Type",
   },

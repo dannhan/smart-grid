@@ -97,6 +97,7 @@ export const rooms = ["A", "B", "C", "D"];
 export const history: History[] = [
   {
     date: "12 April 2024",
+    component: "-",
     action_type: "Repair",
     description: "Replaced broken light",
     technical_specification: "-",
@@ -104,6 +105,7 @@ export const history: History[] = [
   },
   {
     date: "15 May 2024",
+    component: "-",
     action_type: "Replacement",
     description: "Light replaced with new one brand Broco",
     technical_specification: "-",
@@ -111,6 +113,7 @@ export const history: History[] = [
   },
   {
     date: "20 Jun 2024",
+    component: "-",
     action_type: "Repair",
     description: "Cleaned regularly, no issues",
     technical_specification: "-",
@@ -118,6 +121,7 @@ export const history: History[] = [
   },
   {
     date: "01 Aug 2024",
+    component: "-",
     action_type: "Repair",
     description: "Socket A repaired due to minor damage",
     technical_specification: "-",
@@ -125,6 +129,7 @@ export const history: History[] = [
   },
   {
     date: "15 Sep 2024",
+    component: "-",
     action_type: "Replacement",
     description: "Socket replaced due to expired warranty",
     technical_specification: "-",

@@ -1,5 +1,6 @@
 export type History = {
   date: string;
+  component: string;
   action_type: string;
   description: string;
   technical_specification: string;
