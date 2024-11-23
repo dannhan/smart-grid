@@ -15,7 +15,7 @@ import { rooms } from "@/lib/config";
 
 const ControlPage = () => {
   return (
-    <main className="flex min-h-screen min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
+    <main className="flex min-h-screen min-w-[580px] flex-1 flex-col gap-8 px-4 py-8">
       <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
         {rooms.map((room) => (
           <Card key={room.id} className="relative">

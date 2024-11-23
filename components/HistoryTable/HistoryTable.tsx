@@ -32,6 +32,7 @@ const HistoryTable = <TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
+  // TODO: fix the inconsistent width of this element
   return (
     <div className="rounded-md">
       <Table className="border-collapse">

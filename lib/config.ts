@@ -64,7 +64,6 @@ export const chartConfig = {
 
 /* -- Below this should have dedidacted database --------------------------------------------- */
 
-// TODO: href
 export const dashboardInfoItems = [
   {
     title: "Voltage",

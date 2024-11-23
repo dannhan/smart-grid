@@ -4,7 +4,7 @@ import SensorStatus from "@/components/Dashboard/SensorStatus";
 
 const DashboardPage: FC = () => {
   return (
-    <main className="flex min-h-screen flex-1 flex-col gap-8 px-4 py-8 sm:min-w-[540px]">
+    <main className="flex min-h-screen flex-1 flex-col gap-8 px-4 py-8 sm:min-w-[580px]">
       <section className="flex flex-col justify-center gap-3 pb-0 text-lg font-medium sm:hidden">
         <div className="relative">
           <h1 className="text-6xl font-bold text-black/5">GRID</h1>
