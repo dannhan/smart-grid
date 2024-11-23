@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = async ({ children }) => (
   <html lang="en" suppressHydrationWarning>
-    <body className={`${lato.className} antialiased`}>
+    <body className={`${lato.className} antialiased`} suppressHydrationWarning>
       <BaseLayout>{children}</BaseLayout>
       <TailwindIndicator />
     </body>

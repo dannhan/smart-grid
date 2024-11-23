@@ -92,7 +92,24 @@ export const dashboardInfoItems = [
   },
 ];
 
-export const rooms = ["A", "B", "C", "D"];
+export const rooms = [
+  {
+    id: "room-a",
+    name: "A",
+  },
+  {
+    id: "room-b",
+    name: "B",
+  },
+  {
+    id: "room-c",
+    name: "C",
+  },
+  {
+    id: "room-d",
+    name: "D",
+  },
+]
 
 export const history: History[] = [
   {

@@ -1,3 +1,5 @@
+import type { DocumentReference, Timestamp } from "firebase/firestore";
+
 export type History = {
   date: string;
   component: string;
@@ -34,4 +36,18 @@ export type ProcessedMetricsData = {
   [Category in MetricCategory as `${Category}s`]: {
     [Resolution in TimeResolution]: IdentifiedMeasurement[];
   };
+};
+
+// TODO: better types
+export type Component = {
+  name: string;
+  type: "lamp" | "socket" /* | "mcb" | "wire" */;
+  properties: Record<string, string>;
+};
+
+export type Rooms = {
+  name: string;
+  componentsRef?: DocumentReference[];
+  components?: Component[];
+  date_created: Timestamp;
 };

@@ -10,29 +10,31 @@ import {
 } from "@/components/shadcn/card";
 import OfficeBuildings from "@/components/Icon/OfficeBuildings";
 
+// TODO: use data from firebase instead
 import { rooms } from "@/lib/config";
 
 const ControlPage = () => {
   return (
     <main className="flex min-h-screen min-w-[540px] flex-1 flex-col gap-8 px-4 py-8">
       <div className="gap grid w-full grid-cols-2 grid-rows-2 gap-x-12 gap-y-6">
-        {/* TODO: href */}
         {rooms.map((room) => (
-          <Link href={"#"} key={room} className="relative">
-            <Card>
-              <CardHeader className="px-5 py-4">
-                <CardTitle>Room</CardTitle>
-                <ChevronRightIcon
-                  className="absolute right-4 top-3 size-5"
-                  strokeWidth={2.5}
-                />
-              </CardHeader>
-              <CardContent className="flex h-24 justify-around gap-4 px-5 text-xl">
-                <p className="text-7xl font-bold">{room}</p>
-                <OfficeBuildings />
-              </CardContent>
-            </Card>
-          </Link>
+          <Card key={room.id} className="relative">
+            <Link
+              href={`management/${room.id}`}
+              className="absolute h-full w-full max-sm:hidden"
+            />
+            <CardHeader className="px-5 py-4">
+              <CardTitle>Room</CardTitle>
+              <ChevronRightIcon
+                className="absolute right-4 top-3 size-5"
+                strokeWidth={2.5}
+              />
+            </CardHeader>
+            <CardContent className="flex h-24 justify-around gap-4 px-5 text-xl">
+              <p className="text-7xl font-bold">{room.name}</p>
+              <OfficeBuildings />
+            </CardContent>
+          </Card>
         ))}
       </div>
     </main>
