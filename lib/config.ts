@@ -109,7 +109,7 @@ export const rooms = [
     id: "room-d",
     name: "D",
   },
-]
+];
 
 export const history: History[] = [
   {

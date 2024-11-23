@@ -34,7 +34,7 @@ const ElectricComponent: React.FC = () => {
   }, []);
 
   return (
-    <div className="@xl:gap-8 grid w-full grid-cols-2 gap-4">
+    <div className="grid w-full grid-cols-2 gap-4 @xl:gap-8">
       {data &&
         data.components?.map((component) => (
           <ElectricComponentCard

@@ -100,7 +100,7 @@ const Chart: React.FC<ChartProps> = ({ title }) => {
               dataKey={activeChart}
               fill={`var(--color-${activeChart})`}
               radius={[2, 2, 2, 2]} // Add rounded corners (top-left, top-right, bottom-right, bottom-left)
-            // barSize={8} // Consistent slim width
+              // barSize={8} // Consistent slim width
             />
           </BarChart>
         </ChartContainer>

@@ -39,9 +39,7 @@ const SensorStatusCard: React.FC<React.PropsWithChildren & Props> = ({
         className="absolute h-full w-full max-sm:hidden"
       />
       <CardHeader className="relative px-5 pb-0 sm:pt-5">
-        <CardTitle className="hidden sm:block">
-          {title}
-        </CardTitle>
+        <CardTitle className="hidden sm:block">{title}</CardTitle>
         <ChevronRightIcon
           className="absolute right-4 top-3 size-5 max-sm:hidden"
           strokeWidth={2.5}
