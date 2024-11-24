@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/shadcn/button";
 import Lamp from "@/components/Icon/Lamp";
 import Socket from "@/components/Icon/Socket";
+import { ImageIcon } from "lucide-react";
 
 const ElectricComponentCard: React.FC<Component> = ({
   id,
@@ -22,9 +23,13 @@ const ElectricComponentCard: React.FC<Component> = ({
   properties,
 }) => {
   const pathname = usePathname();
+
+  // TODO: change to proper icon
   const Icon = {
     lamp: Lamp,
     socket: Socket,
+    wire: ImageIcon,
+    mcb: ImageIcon,
   }[type];
 
   return (
@@ -34,6 +39,7 @@ const ElectricComponentCard: React.FC<Component> = ({
         <Icon className="mx-auto w-[80px]" />
       </CardHeader>
       <CardContent className="flex w-full flex-1 gap-3">
+        {/* TODO: change this data type into array */}
         <ul>
           {Object.keys(properties).map((key) => (
             <li key={key}>{key}</li>
@@ -46,11 +52,14 @@ const ElectricComponentCard: React.FC<Component> = ({
         </ul>
       </CardContent>
       <CardFooter className="mt-auto flex-col gap-2">
+        {/* TODO: what about using new URL? */}
         <Button className="w-full rounded-full" asChild>
           <Link href={`${pathname}/${id}?action=repair`}>Repair</Link>
         </Button>
         <Button className="w-full rounded-full" asChild>
-          <Link href={`${pathname}/${id}?action=change`}>Change</Link>
+          <Link href={`${pathname}/${id}?action=change&type=${type}`}>
+            Change
+          </Link>
         </Button>
       </CardFooter>
     </Card>

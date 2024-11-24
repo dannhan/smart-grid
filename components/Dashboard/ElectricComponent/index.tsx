@@ -7,20 +7,22 @@ import type { Rooms, Component } from "@/types";
 import { firestore } from "@/lib/firebase/database";
 import ElectricComponentCard from "./ElectricComponentCard";
 
+interface Props {
+  roomId: string;
+}
+
 // TODO:
-// pass params from parent
 // maybe better fetching strategy (server-side?, cache?)
 // add skeleton ui and loading ui
-const ElectricComponent: React.FC = () => {
+const ElectricComponent: React.FC<Props> = ({ roomId }) => {
   const [data, setData] = React.useState<Rooms | undefined>();
 
   React.useEffect(() => {
-    getDoc(doc(firestore, "rooms", "room-a"))
+    getDoc(doc(firestore, "rooms", roomId))
       .then((snap) => snap.data() as Rooms)
       .then(async (rooms) => {
         const components = await Promise.all(
           rooms.componentsRef!.map(async (componentRef) => {
-            // TODO: return await getDoc(componentRef).then((data) => data.data());
             const componentSnap = await getDoc(componentRef);
             return {
               id: componentSnap.id,
@@ -41,13 +43,7 @@ const ElectricComponent: React.FC = () => {
     <div className="grid w-full grid-cols-2 gap-4 @xl:gap-8">
       {data &&
         data.components?.map((component) => (
-          <ElectricComponentCard
-            id={component.id}
-            key={component.name}
-            type={component.type}
-            name={component.name}
-            properties={component.properties}
-          />
+          <ElectricComponentCard key={component.id} {...component} />
         ))}
     </div>
   );

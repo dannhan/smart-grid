@@ -35,32 +35,37 @@ import {
 } from "@/components/shadcn/popover";
 
 const formSchema = z.object({
-  image: z.string().optional(),
   brand: z.string(),
   voltage: z.string(),
-  power: z.string(),
-  lumens: z.string(),
-  warranty_expire: z.coerce.date(),
+  "max.-current": z.string(),
+  "warranty-exp.": z.coerce.date(),
+  image: z.string().optional(),
   description: z.string().optional(),
 });
 
-// TODO: think about what the content of the form
-const ElectricComponentChangeform: React.FC = () => {
+interface Props {
+  componentId: string;
+}
+
+// TODO:
+// handle file upload
+// fetch data for default value
+const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
   const [files, setFiles] = React.useState<File[] | null>(null);
 
   const dropZoneConfig = {
     maxSize: 1024 * 1024 * 4,
     multiple: false,
   };
+
   // TODO: set the default
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       brand: "",
       voltage: "",
-      power: "",
-      lumens: "",
-      warranty_expire: new Date(),
+      "max.-current": "",
+      "warranty-exp.": new Date(),
       description: "",
     },
   });
@@ -165,10 +170,10 @@ const ElectricComponentChangeform: React.FC = () => {
 
         <FormField
           control={form.control}
-          name="power"
+          name="max.-current"
           render={({ field }) => (
             <FormItem className="grid grid-cols-[90px,1fr] items-center gap-4 space-y-0">
-              <FormLabel>Power</FormLabel>
+              <FormLabel>Max. Current</FormLabel>
               <FormControl>
                 <div className="flex w-full items-center gap-2">
                   <span>:</span>
@@ -182,24 +187,7 @@ const ElectricComponentChangeform: React.FC = () => {
 
         <FormField
           control={form.control}
-          name="lumens"
-          render={({ field }) => (
-            <FormItem className="grid grid-cols-[90px,1fr] items-center gap-4 space-y-0">
-              <FormLabel>Lumens</FormLabel>
-              <FormControl>
-                <div className="flex w-full items-center gap-2">
-                  <span>:</span>
-                  <Input {...field} />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="warranty_expire"
+          name="warranty-exp."
           render={({ field }) => (
             <FormItem className="grid grid-cols-[90px,1fr] items-center gap-4 space-y-0">
               <FormLabel>Warranty Exp.</FormLabel>
@@ -261,4 +249,4 @@ const ElectricComponentChangeform: React.FC = () => {
   );
 };
 
-export default ElectricComponentChangeform;
+export default SocketChangeForm;

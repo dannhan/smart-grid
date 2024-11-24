@@ -30,7 +30,8 @@ const formSchema = z.object({
   description: z.string().optional(),
 });
 
-const ElectricComponentRepairForm: React.FC = () => {
+// TODO: handle file upload
+const RepairForm: React.FC = () => {
   const [files, setFiles] = React.useState<File[] | null>(null);
 
   const dropZoneConfig = {
@@ -40,6 +41,9 @@ const ElectricComponentRepairForm: React.FC = () => {
   };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      description: "",
+    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -128,4 +132,4 @@ const ElectricComponentRepairForm: React.FC = () => {
   );
 };
 
-export default ElectricComponentRepairForm;
+export default RepairForm;

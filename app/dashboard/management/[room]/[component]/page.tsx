@@ -4,15 +4,18 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 import { XIcon } from "lucide-react";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import ElectricComponentChangeform from "@/components/Dashboard/ElectricComponent/ElectricComponentChangeForm";
-import ElectricComponentRepairForm from "@/components/Dashboard/ElectricComponent/ElectricComponentRepairForm";
+import ElectricComponentRepairForm from "@/components/Forms/RepairForm";
+import LampChangeForm from "@/components/Forms/LampChangeForm";
+import SocketChangeForm from "@/components/Forms/SocketChangeForm";
 
+// TODO: searchParams and route type safety
 interface Props {
   params: { component: string; room: string };
   searchParams: Record<string, string>;
@@ -20,7 +23,7 @@ interface Props {
 
 const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
   const { component, room } = params;
-  const { action } = searchParams;
+  const { action, type } = searchParams;
 
   if (!(action === "change" || action === "repair")) {
     return notFound();
@@ -30,10 +33,8 @@ const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
     <main className="flex min-h-screen min-w-[580px] flex-1 flex-col gap-8 px-4 py-8">
       <Card className="flex min-h-96 w-full flex-col items-center justify-between rounded-xl">
         <CardHeader className="relative w-full text-center">
-          {/* TODO: title */}
           <CardTitle className="capitalize">
-            {/* {`${component.replace(/-/g, " ")} ${action}`} */}
-            {`${action}`}
+            {`${component.replace(/-/g, " ")} ${action}`}
           </CardTitle>
           <Link
             href={`/dashboard/management/${room}`}
@@ -43,10 +44,14 @@ const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
           </Link>
         </CardHeader>
         <CardContent className="h-full w-full flex-1">
-          {action === "change" ? (
-            <ElectricComponentChangeform />
-          ) : (
+          {action === "repair" ? (
             <ElectricComponentRepairForm />
+          ) : type === "lamp" ? (
+            <LampChangeForm componentId={component} />
+          ) : type === "socket" ? (
+            <SocketChangeForm componentId={component} />
+          ) : (
+            <p>Type Unknown</p>
           )}
         </CardContent>
       </Card>
