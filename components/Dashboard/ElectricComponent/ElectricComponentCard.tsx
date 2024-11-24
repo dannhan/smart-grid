@@ -1,4 +1,6 @@
 import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import type { Component } from "@/types";
 
@@ -14,10 +16,12 @@ import Lamp from "@/components/Icon/Lamp";
 import Socket from "@/components/Icon/Socket";
 
 const ElectricComponentCard: React.FC<Component> = ({
+  id,
   type,
   name,
   properties,
 }) => {
+  const pathname = usePathname();
   const Icon = {
     lamp: Lamp,
     socket: Socket,
@@ -42,8 +46,12 @@ const ElectricComponentCard: React.FC<Component> = ({
         </ul>
       </CardContent>
       <CardFooter className="mt-auto flex-col gap-2">
-        <Button className="w-full rounded-full">Repair</Button>
-        <Button className="w-full rounded-full">Change</Button>
+        <Button className="w-full rounded-full" asChild>
+          <Link href={`${pathname}/${id}?action=repair`}>Repair</Link>
+        </Button>
+        <Button className="w-full rounded-full" asChild>
+          <Link href={`${pathname}/${id}?action=change`}>Change</Link>
+        </Button>
       </CardFooter>
     </Card>
   );

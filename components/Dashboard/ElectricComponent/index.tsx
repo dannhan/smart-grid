@@ -9,7 +9,8 @@ import ElectricComponentCard from "./ElectricComponentCard";
 
 // TODO:
 // pass params from parent
-// maybe better fetching strategy
+// maybe better fetching strategy (server-side?, cache?)
+// add skeleton ui and loading ui
 const ElectricComponent: React.FC = () => {
   const [data, setData] = React.useState<Rooms | undefined>();
 
@@ -21,7 +22,10 @@ const ElectricComponent: React.FC = () => {
           rooms.componentsRef!.map(async (componentRef) => {
             // TODO: return await getDoc(componentRef).then((data) => data.data());
             const componentSnap = await getDoc(componentRef);
-            return componentSnap.data() as Component;
+            return {
+              id: componentSnap.id,
+              ...componentSnap.data(),
+            } as Component;
           }),
         );
         delete rooms.componentsRef;
@@ -38,6 +42,7 @@ const ElectricComponent: React.FC = () => {
       {data &&
         data.components?.map((component) => (
           <ElectricComponentCard
+            id={component.id}
             key={component.name}
             type={component.type}
             name={component.name}

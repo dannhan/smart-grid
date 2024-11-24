@@ -1,6 +1,8 @@
 import type { FC, PropsWithChildren } from "react";
 import type { Metadata } from "next";
 
+import { Toaster } from "sonner";
+
 import "./globals.css";
 import { lato } from "./fonts";
 
@@ -16,6 +18,7 @@ const RootLayout: FC<PropsWithChildren> = async ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={`${lato.className} antialiased`} suppressHydrationWarning>
       <BaseLayout>{children}</BaseLayout>
+      <Toaster />
       <TailwindIndicator />
     </body>
   </html>

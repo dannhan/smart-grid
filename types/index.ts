@@ -40,6 +40,7 @@ export type ProcessedMetricsData = {
 
 // TODO: better types
 export type Component = {
+  id: string;
   name: string;
   type: "lamp" | "socket" /* | "mcb" | "wire" */;
   properties: Record<string, string>;
