@@ -23,7 +23,6 @@ const ElectricComponentCard: React.FC<Component> = ({
   properties,
 }) => {
   const pathname = usePathname();
-
   // TODO: change to proper icon
   const Icon = {
     lamp: Lamp,
@@ -39,15 +38,18 @@ const ElectricComponentCard: React.FC<Component> = ({
         <Icon className="mx-auto w-[80px]" />
       </CardHeader>
       <CardContent className="flex w-full flex-1 gap-3">
-        {/* TODO: change this data type into array */}
         <ul>
-          {Object.keys(properties).map((key) => (
-            <li key={key}>{key}</li>
+          {properties.map((property: Record<string, string>) => (
+            <li key={JSON.stringify(property)} className="capitalize leading-8">
+              {Object.keys(property)[0].replace("-", " ")}
+            </li>
           ))}
         </ul>
         <ul>
-          {Object.values(properties).map((value) => (
-            <li key={value}>: {value}</li>
+          {properties.map((property: Record<string, string>) => (
+            <li key={JSON.stringify(property)} className="capitalize leading-8">
+              : {Object.values(property)[0].replace("-", " ")}
+            </li>
           ))}
         </ul>
       </CardContent>

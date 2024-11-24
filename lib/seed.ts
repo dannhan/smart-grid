@@ -4,13 +4,13 @@ import { firestore } from "@/lib/firebase/database";
 export async function seedLamps() {
   const obj = {
     type: "lamp",
-    properties: {
-      brand: "Broco",
-      power: "15 watt",
-      lumens: "1400",
-      voltage: "220 volt",
-      "warranty-exp.": "12 Apr 2025",
-    },
+    properties: [
+      { brand: "Broco" },
+      { power: "15 watt" },
+      { lumens: "1400" },
+      { voltage: "220 volt" },
+      { "warranty-exp.": "12 Apr 2025" },
+    ],
   };
   await setDoc(doc(firestore, "components", "lamp-a"), {
     name: "Lamp A",
@@ -33,12 +33,12 @@ export async function seedLamps() {
 export async function seedSockets() {
   const obj = {
     type: "socket",
-    properties: {
-      brand: "Broco",
-      "max.-current": "16 ampere",
-      voltage: "220 volt",
-      "warranty-exp.": "12 Apr 2025",
-    },
+    properties: [
+      { brand: "Broco" },
+      { "max.-current": "16 ampere" },
+      { voltage: "220 volt" },
+      { "warranty-exp.": "12 Apr 2025" },
+    ],
   };
   await setDoc(doc(firestore, "components", "socket-a"), {
     name: "Socket A",
@@ -56,6 +56,11 @@ export async function seedSockets() {
     name: "Socket D",
     ...obj,
   });
+}
+
+export async function seedComponents() {
+  await seedLamps();
+  await seedSockets();
 }
 
 export async function seedRooms() {
