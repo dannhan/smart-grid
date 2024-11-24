@@ -48,7 +48,7 @@ interface Props {
   componentId: string;
 }
 
-// TODO: 
+// TODO:
 // handle file upload
 // fetch data for default value
 const LampChangeForm: React.FC<Props> = ({ componentId }) => {
