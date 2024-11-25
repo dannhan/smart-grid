@@ -6,11 +6,11 @@ import { Measurement, RawMetricsData, ProcessedMetricsData } from "@/types";
 import useRealtimeObject from "@/hooks/useReatimeObject";
 import ChartCard from "./ChartCard";
 
-import { db } from "@/lib/firebase/database";
+import { database } from "@/lib/firebase/database";
 
 const MonitorChart: React.FC = () => {
   const { data, loading } = useRealtimeObject<RawMetricsData>(
-    db,
+    database,
     "/monitor/",
     300,
   );
@@ -50,7 +50,6 @@ const MonitorChart: React.FC = () => {
         data={formattedData.powers}
         loading={loading}
       />
-      ;
     </>
   );
 };

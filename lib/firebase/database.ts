@@ -11,6 +11,5 @@ const firebaseConfig: FirebaseOptions = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Realtime Database and get a reference to the service
-// TODO: change db to database
-export const db = getDatabase(app);
+export const database = getDatabase(app);
 export const firestore = getFirestore(app);

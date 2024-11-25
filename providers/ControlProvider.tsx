@@ -4,7 +4,7 @@ import { createContext, useContext, type FC, type ReactNode } from "react";
 import { ref, set } from "firebase/database";
 
 import type { Room } from "@/types";
-import { db } from "@/lib/firebase/database";
+import { database } from "@/lib/firebase/database";
 import useRealtimeObject from "@/hooks/useReatimeObject";
 
 // Define the shape of the context
@@ -32,13 +32,15 @@ export const ControlProvider: FC<{ children: ReactNode }> = ({ children }) => {
     data: rooms,
     loading,
     error,
-  } = useRealtimeObject<Record<string, Room>>(db, "control");
+  } = useRealtimeObject<Record<string, Room>>(database, "control");
 
   // Function to toggle the lamp or socket state
   const toggleSwitch = (roomId: string, field: "lamp" | "socket") => {
     if (!rooms) return;
-    const roomRef = ref(db, `control/${roomId}/${field}`);
-    set(roomRef, !rooms[roomId][field]); // Toggle the value in Firebase
+
+    // Toggle the value in Firebase
+    const roomRef = ref(database, `control/${roomId}/${field}`);
+    set(roomRef, !rooms[roomId][field]);
   };
 
   return (

@@ -12,18 +12,18 @@ import Voltmeter from "@/components/Icon/Voltmeter";
 import Amperemeter from "@/components/Icon/Amperemeter";
 import SensorStatusCard from "./SensorStatusCard";
 
-import { db } from "@/lib/firebase/database";
+import { database } from "@/lib/firebase/database";
 
 const SensorStatus: React.FC = () => {
   // PERF: this hook is not optimal
   const { data: volt } = useRealtimeList<Measurement>(
-    db,
+    database,
     "monitor/voltages/realtime",
     orderByKey(),
     limitToLast(1),
   );
   const { data: current } = useRealtimeList<Measurement>(
-    db,
+    database,
     "monitor/currents/realtime",
     orderByKey(),
     limitToLast(1),

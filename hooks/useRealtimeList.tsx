@@ -9,7 +9,7 @@ import {
 
 // TODO: might see: https://github.com/CSFrequency/react-firebase-hooks/blob/master/database/README.md
 function useRealtimeList<T>(
-  db: Database,
+  database: Database,
   path: string,
   debounceTimeOrConstraint: number | QueryConstraint = 0,
   ...restConstraints: QueryConstraint[]
@@ -34,7 +34,7 @@ function useRealtimeList<T>(
         };
 
   useEffect(() => {
-    const dataRef = query(ref(db, path), ...constraints);
+    const dataRef = query(ref(database, path), ...constraints);
     let debounceTimeout: NodeJS.Timeout | null = null;
 
     const dataListener = onValue(
@@ -69,7 +69,7 @@ function useRealtimeList<T>(
       dataListener();
       if (debounceTimeout) clearTimeout(debounceTimeout);
     };
-  }, [db, path, debounceTime]);
+  }, [database, path, debounceTime]);
 
   return { data, loading, error };
 }
