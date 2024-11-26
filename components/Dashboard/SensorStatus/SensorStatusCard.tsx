@@ -36,7 +36,7 @@ const SensorStatusCard: React.FC<React.PropsWithChildren & Props> = ({
       <Link
         href="monitoring"
         key={title}
-        className="absolute h-full w-full max-sm:hidden"
+        className="absolute z-10 h-full w-full max-sm:hidden"
       />
       <CardHeader className="relative px-5 pb-0 sm:pt-5">
         <CardTitle className="hidden sm:block">{title}</CardTitle>

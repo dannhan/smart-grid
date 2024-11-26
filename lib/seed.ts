@@ -67,6 +67,14 @@ export async function seedRooms() {
   const now = Timestamp.now(); // Current timestamp
 
   await Promise.all([
+    setDoc(doc(firestore, "rooms", "room-a"), {
+      name: "A",
+      componentsRef: [
+        doc(firestore, "components", "lamp-a"),
+        doc(firestore, "components", "socket-a"),
+      ],
+      "date-created": now,
+    }),
     setDoc(doc(firestore, "rooms", "room-b"), {
       name: "B",
       componentsRef: [
