@@ -1,13 +1,4 @@
-import type { DocumentReference, Timestamp } from "firebase/firestore";
-
-export type History = {
-  date: string;
-  component: string;
-  action_type: string;
-  description: string;
-  technical_specification: string;
-  image: string;
-};
+import { DocumentReference, Timestamp } from "firebase/firestore";
 
 export type Room = {
   name: string;
@@ -41,35 +32,35 @@ export type ProcessedMetricsData = {
 // TODO: better types
 export type Component =
   | {
-      id: string;
-      name: string;
-      type: "lamp";
-      properties: [
-        { brand: string },
-        { voltage: string },
-        { power: string },
-        { lumens: string },
-        { "warranty-exp.": string },
-      ];
-    }
+    id: string;
+    name: string;
+    type: "lamp";
+    properties: [
+      { brand: string },
+      { voltage: string },
+      { power: string },
+      { lumens: string },
+      { "warranty-exp.": string },
+    ];
+  }
   | {
-      id: string;
-      name: string;
-      type: "socket";
-      properties: [
-        { brand: string },
-        { voltage: string },
-        { "max.-current": string },
-        { "warranty-exp.": string },
-      ];
-    }
+    id: string;
+    name: string;
+    type: "socket";
+    properties: [
+      { brand: string },
+      { voltage: string },
+      { "max.-current": string },
+      { "warranty-exp.": string },
+    ];
+  }
   // TODO: complete the type
   | {
-      id: string;
-      name: string;
-      type: "mcb" | "wire";
-      properties: Record<string, string>[];
-    };
+    id: string;
+    name: string;
+    type: "mcb" | "wire";
+    properties: Record<string, string>[];
+  };
 
 export type Rooms = {
   name: string;

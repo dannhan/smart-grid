@@ -1,5 +1,6 @@
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { addDoc, doc, collection, setDoc, Timestamp } from "firebase/firestore";
 import { firestore } from "@/lib/firebase/database";
+import { RepairHistory } from "@/lib/schema";
 
 export async function seedLamps() {
   const obj = {
@@ -102,4 +103,32 @@ export async function seedRooms() {
   ]);
 
   console.log("Rooms seed completed!");
+}
+
+export async function seedHistory() {
+  await addDoc(collection(firestore, "repair-histories"), {
+    // Month is 0 index
+    date: Timestamp.fromDate(new Date(2024, 3, 12)),
+    "component-name": "Lamp A",
+    "component-ref": doc(firestore, "components", "lamp-a"),
+    "action-type": "Repair",
+    description: "Replaced broken light",
+    image: "-",
+  } satisfies RepairHistory);
+  await addDoc(collection(firestore, "repair-histories"), {
+    date: Timestamp.fromDate(new Date(2024, 4, 15)),
+    "component-name": "Lamp A",
+    "component-ref": doc(firestore, "components", "lamp-b"),
+    "action-type": "Replacement",
+    description: "Replaced broken light",
+    "technical-specification": {
+      brand: "Broco",
+      power: "15 watt",
+      lumens: "1400",
+      voltage: "220 volt",
+      // TODO: warranty
+      "warranty-exp.": "12 Apr 2025",
+    },
+    image: "-",
+  } satisfies RepairHistory);
 }

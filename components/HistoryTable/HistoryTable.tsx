@@ -17,15 +17,14 @@ import {
   TableRow,
 } from "@/components/shadcn/table";
 
-interface HistoryTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+import type { RepairHistory } from "@/lib/schema";
+
+interface HistoryTableProps {
+  columns: ColumnDef<RepairHistory>[];
+  data: RepairHistory[];
 }
 
-const HistoryTable = <TData, TValue>({
-  columns,
-  data,
-}: HistoryTableProps<TData, TValue>) => {
+const HistoryTable = ({ columns, data }: HistoryTableProps) => {
   // TODO: ssr?
   const table = useReactTable({
     data,
@@ -48,9 +47,9 @@ const HistoryTable = <TData, TValue>({
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
                 </TableHead>
               );
             })}
@@ -72,8 +71,10 @@ const HistoryTable = <TData, TValue>({
                     cell.column.id === "date" && "min-w-[94px]",
                     // cell.column.id === "name" && "min-w-24",
                     // cell.column.id === "action_type" && "min-w-[100px]",
-                    cell.column.id === "description" && "min-w-[98px]",
-                    cell.column.id === "technical_specification" && "w-28",
+                    // TODO: reduce the width of description column
+                    cell.column.id === "description" && "min-w-[80px]",
+                    cell.column.id === "technical-specification" &&
+                    "min-w-[80px]",
                     cell.column.id === "image" && "min-w-[90px]",
                   )}
                 >

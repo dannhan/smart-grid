@@ -1,8 +1,13 @@
-import { seedComponents } from "@/lib/seed";
+import { seedComponents, seedHistory } from "@/lib/seed";
+import { NextPage } from "next";
 
-export default async function Page() {
-  if (process.env.NODE_ENV === "production") return <h1>Hello World</h1>;
-  await seedComponents();
+const Page: NextPage = async () => {
+  if (process.env.NODE_ENV === "development") {
+    await seedComponents();
+    await seedHistory();
+  }
 
   return <h1>Hello World</h1>;
-}
+};
+
+export default Page;

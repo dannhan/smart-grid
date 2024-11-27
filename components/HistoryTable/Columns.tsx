@@ -1,19 +1,19 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import type { History } from "@/types";
+import type { RepairHistory } from "@/lib/schema";
 
-export const columns: ColumnDef<History>[] = [
+export const columns: ColumnDef<RepairHistory>[] = [
   {
     accessorKey: "date",
     header: "Date",
   },
   {
-    accessorKey: "component",
+    accessorKey: "component-name",
     header: "Component",
   },
   {
-    accessorKey: "action_type",
+    accessorKey: "action-type",
     header: "Action Type",
   },
   {
@@ -21,8 +21,25 @@ export const columns: ColumnDef<History>[] = [
     header: "Description",
   },
   {
-    accessorKey: "technical_specification",
+    accessorKey: "technical-specification",
     header: "Technical Specification (Replacement)",
+    cell: ({ row }) => {
+      const properties: Record<string, string> | undefined = row.getValue(
+        "technical-specification",
+      );
+
+      return properties ? (
+        <ul>
+          {Object.entries(properties).map(([key, value]) => (
+            <li key={key} className="capitalize leading-5">
+              {key.replace("-", " ")}: {value.replace("-", " ")}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        "-"
+      );
+    },
   },
   {
     accessorKey: "image",
