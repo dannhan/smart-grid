@@ -1,4 +1,4 @@
-import { discriminatedUnion, z } from "zod";
+import { z } from "zod";
 import { DocumentReference, Timestamp } from "firebase/firestore";
 
 const TimestampType = z.custom<Timestamp>(

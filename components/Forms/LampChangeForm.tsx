@@ -51,7 +51,7 @@ interface Props {
 // TODO:
 // handle file upload
 // fetch data for default value
-const LampChangeForm: React.FC<Props> = ({ componentId }) => {
+const LampChangeForm: React.FC<Props> = () => {
   const [files, setFiles] = React.useState<File[] | null>(null);
 
   const dropZoneConfig = {
@@ -95,7 +95,8 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
         <FormField
           control={form.control}
           name="image"
-          render={({ field }) => (
+          // render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormControl>
                 <FileUploader

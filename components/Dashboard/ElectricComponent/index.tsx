@@ -38,7 +38,7 @@ const ElectricComponent: React.FC<Props> = ({ roomId }) => {
         alert("An error occured. Please try again later.");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [roomId]);
 
   return (
     <div className="grid w-full grid-cols-2 gap-4 @xl:gap-8">

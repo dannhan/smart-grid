@@ -69,7 +69,8 @@ const RepairForm: React.FC = () => {
         <FormField
           control={form.control}
           name="image"
-          render={({ field }) => (
+          // render={({ field }) => (
+          render={() => (
             <FormItem>
               {/* TODO:*/}
               <FormControl>
