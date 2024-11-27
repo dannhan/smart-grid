@@ -43,10 +43,13 @@ const HistoryPage: FC = async () => {
       const date = (parsed.data.date as Timestamp).toDate();
       const formattedDate = format(date, "dd MMMM yyyy");
 
-      delete parsed.data["component-ref"];
       return {
-        ...parsed.data,
         date: formattedDate,
+        "action-type": parsed.data["action-type"],
+        "component-name": parsed.data["component-name"],
+        description: parsed.data["description"],
+        image: parsed.data["image"],
+        "technical-specification": parsed.data["technical-specification"],
       };
     }
 

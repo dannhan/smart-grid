@@ -11,7 +11,7 @@ const DocumentReferenceType = z.custom<DocumentReference>(
 
 export const baseHistorySchema = z.object({
   // component-ref might not be used
-  "component-ref": DocumentReferenceType.or(z.undefined()),
+  "component-ref": DocumentReferenceType,
   "component-name": z.string(),
   date: z.string().or(TimestampType),
   description: z.string(),

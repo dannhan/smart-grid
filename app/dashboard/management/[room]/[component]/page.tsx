@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import ElectricComponentRepairForm from "@/components/Forms/RepairForm";
+import RepairForm from "@/components/Forms/RepairForm";
 import LampChangeForm from "@/components/Forms/LampChangeForm";
 import SocketChangeForm from "@/components/Forms/SocketChangeForm";
 
@@ -45,7 +45,7 @@ const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
         </CardHeader>
         <CardContent className="h-full w-full flex-1">
           {action === "repair" ? (
-            <ElectricComponentRepairForm />
+            <RepairForm component={component} />
           ) : type === "lamp" ? (
             <LampChangeForm componentId={component} />
           ) : type === "socket" ? (

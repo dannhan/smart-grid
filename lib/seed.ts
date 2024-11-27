@@ -1,4 +1,12 @@
-import { addDoc, doc, collection, setDoc, Timestamp } from "firebase/firestore";
+import {
+  addDoc,
+  doc,
+  collection,
+  setDoc,
+  Timestamp,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
 import { firestore } from "@/lib/firebase/database";
 import { RepairHistory } from "@/lib/schema";
 
@@ -106,7 +114,14 @@ export async function seedRooms() {
 }
 
 export async function seedHistory() {
-  await addDoc(collection(firestore, "repair-histories"), {
+  const repairHistoriesCollection = collection(firestore, "repair-histories");
+  const snapshot = await getDocs(repairHistoriesCollection);
+  const deletePromises = snapshot.docs.map((docSnapshot) =>
+    deleteDoc(docSnapshot.ref),
+  );
+
+  await Promise.all(deletePromises); // Ensure all deletions are complete before proceeding
+  await addDoc(repairHistoriesCollection, {
     // Month is 0 index
     date: Timestamp.fromDate(new Date(2024, 3, 12)),
     "component-name": "Lamp A",
@@ -115,7 +130,7 @@ export async function seedHistory() {
     description: "Replaced broken light",
     image: "-",
   } satisfies RepairHistory);
-  await addDoc(collection(firestore, "repair-histories"), {
+  await addDoc(repairHistoriesCollection, {
     date: Timestamp.fromDate(new Date(2024, 4, 15)),
     "component-name": "Lamp A",
     "component-ref": doc(firestore, "components", "lamp-b"),

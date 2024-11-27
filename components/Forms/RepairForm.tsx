@@ -3,10 +3,11 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 
+import { addDoc, collection, doc, Timestamp } from "firebase/firestore";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { CloudUploadIcon, PaperclipIcon } from "lucide-react";
+import { CloudUploadIcon, PaperclipIcon, LoaderCircleIcon } from "lucide-react";
 
 import { Button } from "@/components/shadcn/button";
 import {
@@ -25,13 +26,24 @@ import {
 } from "@/components/shadcn/file-upload";
 import { Textarea } from "@/components/shadcn/textarea";
 
+import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
+import { formatName } from "@/lib/utils";
+import { firestore } from "@/lib/firebase/database";
+
 const formSchema = z.object({
-  image: z.string().optional(),
-  description: z.string().optional(),
+  image: z.string().min(0),
+  description: z.string().min(0),
 });
 
-// TODO: handle file upload
-const RepairForm: React.FC = () => {
+interface Props {
+  component: string;
+}
+
+// TODO:
+// redirect after uploading
+// handle file upload
+const RepairForm: React.FC<Props> = ({ component }) => {
+  const [loading, setLoading] = React.useState(false);
   const [files, setFiles] = React.useState<File[] | null>(null);
 
   const dropZoneConfig = {
@@ -43,20 +55,30 @@ const RepairForm: React.FC = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       description: "",
+      image: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
-      );
+      setLoading(true);
+
+      const data: RepairHistory = {
+        "action-type": "Repair",
+        date: Timestamp.now(),
+        "component-name": formatName(component),
+        "component-ref": doc(firestore, "components", component),
+        ...values,
+      };
+      repairHistorySchema.parse(data);
+
+      await addDoc(collection(firestore, "repair-histories"), data);
+      toast.success("Form submitted.");
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -125,7 +147,12 @@ const RepairForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading && (
+            <div className="h-wit w-fit rounded-full p-0.5">
+              <LoaderCircleIcon className="h-4 w-4 animate-spin text-primary" />
+            </div>
+          )}
           Submit
         </Button>
       </form>
