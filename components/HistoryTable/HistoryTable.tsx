@@ -47,9 +47,9 @@ const HistoryTable = ({ columns, data }: HistoryTableProps) => {
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                 </TableHead>
               );
             })}
@@ -74,7 +74,7 @@ const HistoryTable = ({ columns, data }: HistoryTableProps) => {
                     // TODO: reduce the width of description column
                     cell.column.id === "description" && "min-w-[80px]",
                     cell.column.id === "technical-specification" &&
-                    "min-w-[80px]",
+                      "min-w-[80px]",
                     cell.column.id === "image" && "min-w-[90px]",
                   )}
                 >

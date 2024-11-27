@@ -1,0 +1,3 @@
+- [ ] implement form functionality
+- [ ] implement image uploading
+- [ ] implement AR

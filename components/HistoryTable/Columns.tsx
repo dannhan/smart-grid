@@ -31,7 +31,7 @@ export const columns: ColumnDef<RepairHistory>[] = [
       return properties ? (
         <ul>
           {Object.entries(properties).map(([key, value]) => (
-            <li key={key} className="capitalize leading-5">
+            <li key={key} className="capitalize leading-4">
               {key.replace("-", " ")}: {value.replace("-", " ")}
             </li>
           ))}
