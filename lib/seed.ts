@@ -15,9 +15,9 @@ export async function seedLamps() {
     type: "lamp",
     properties: [
       { brand: "Broco" },
+      { voltage: "220 volt" },
       { power: "15 watt" },
       { lumens: "1400" },
-      { voltage: "220 volt" },
       { "warranty-exp.": "12 Apr 2025" },
     ],
   };
@@ -44,8 +44,8 @@ export async function seedSockets() {
     type: "socket",
     properties: [
       { brand: "Broco" },
-      { "max.-current": "16 ampere" },
       { voltage: "220 volt" },
+      { "max.-current": "16 ampere" },
       { "warranty-exp.": "12 Apr 2025" },
     ],
   };
@@ -136,14 +136,14 @@ export async function seedHistory() {
     "component-ref": doc(firestore, "components", "lamp-b"),
     "action-type": "Replacement",
     description: "Replaced broken light",
-    "technical-specification": {
-      brand: "Broco",
-      power: "15 watt",
-      lumens: "1400",
-      voltage: "220 volt",
+    "technical-specification": [
+      { brand: "Broco" },
+      { power: "15 watt" },
+      { lumens: "1400" },
+      { voltage: "220 volt" },
       // TODO: warranty
-      "warranty-exp.": "12 Apr 2025",
-    },
+      { "warranty-exp.": "12 Apr 2025" },
+    ],
     image: "-",
   } satisfies RepairHistory);
 }

@@ -24,15 +24,16 @@ export const columns: ColumnDef<RepairHistory>[] = [
     accessorKey: "technical-specification",
     header: "Technical Specification (Replacement)",
     cell: ({ row }) => {
-      const properties: Record<string, string> | undefined = row.getValue(
+      const properties: Record<string, string>[] | undefined = row.getValue(
         "technical-specification",
       );
 
       return properties ? (
         <ul>
-          {Object.entries(properties).map(([key, value]) => (
-            <li key={key} className="capitalize leading-4">
-              {key.replace("-", " ")}: {value.replace("-", " ")}
+          {properties.map((obj, index) => (
+            <li key={index} className="capitalize leading-4">
+              {Object.keys(obj)[0].replace("-", " ")}:{" "}
+              {Object.values(obj)[0].replace("-", " ")}
             </li>
           ))}
         </ul>

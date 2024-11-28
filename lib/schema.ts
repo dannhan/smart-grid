@@ -25,7 +25,7 @@ const repairSchema = baseHistorySchema.extend({
 
 const nonRepairSchema = baseHistorySchema.extend({
   "action-type": z.literal("Replacement"),
-  "technical-specification": z.record(z.string(), z.string()),
+  "technical-specification": z.array(z.record(z.string(), z.string())),
 });
 
 // TODO: handle other action type

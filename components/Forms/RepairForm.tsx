@@ -36,13 +36,13 @@ const formSchema = z.object({
 });
 
 interface Props {
-  component: string;
+  componentId: string;
 }
 
 // TODO:
 // redirect after uploading
 // handle file upload
-const RepairForm: React.FC<Props> = ({ component }) => {
+const RepairForm: React.FC<Props> = ({ componentId }) => {
   const [loading, setLoading] = React.useState(false);
   const [files, setFiles] = React.useState<File[] | null>(null);
 
@@ -59,6 +59,7 @@ const RepairForm: React.FC<Props> = ({ component }) => {
     },
   });
 
+  // TODO: change this into server action
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setLoading(true);
@@ -66,13 +67,14 @@ const RepairForm: React.FC<Props> = ({ component }) => {
       const data: RepairHistory = {
         "action-type": "Repair",
         date: Timestamp.now(),
-        "component-name": formatName(component),
-        "component-ref": doc(firestore, "components", component),
+        "component-name": formatName(componentId),
+        "component-ref": doc(firestore, "components", componentId),
         ...values,
       };
-      repairHistorySchema.parse(data);
 
+      repairHistorySchema.parse(data);
       await addDoc(collection(firestore, "repair-histories"), data);
+
       toast.success("Form submitted.");
     } catch (error) {
       console.error("Form submission error", error);

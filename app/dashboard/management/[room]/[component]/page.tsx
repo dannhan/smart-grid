@@ -45,7 +45,7 @@ const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
         </CardHeader>
         <CardContent className="h-full w-full flex-1">
           {action === "repair" ? (
-            <RepairForm component={component} />
+            <RepairForm componentId={component} />
           ) : type === "lamp" ? (
             <LampChangeForm componentId={component} />
           ) : type === "socket" ? (

@@ -24,7 +24,11 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const path: string = usePathname().split("/").pop() || "";
 
   if (windowSize.width === null) {
-    return <LoadingOverlay />;
+    if (process.env.NODE_ENV === "production") {
+      return <LoadingOverlay />;
+    }
+
+    windowSize.width = 9999;
   }
 
   if (windowSize.width >= 640) {
