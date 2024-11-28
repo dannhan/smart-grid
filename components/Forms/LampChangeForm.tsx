@@ -4,17 +4,22 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 
 import {
-  addDoc,
-  collection,
   doc,
-  Timestamp,
+  addDoc,
   updateDoc,
+  collection,
+  Timestamp,
 } from "firebase/firestore";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { CloudUploadIcon, PaperclipIcon, CalendarIcon } from "lucide-react";
+import {
+  CloudUploadIcon,
+  PaperclipIcon,
+  CalendarIcon,
+  LoaderCircleIcon,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/shadcn/button";
@@ -88,6 +93,10 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
   // TODO: change this into server action
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setLoading(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
       const data: RepairHistory = {
         "action-type": "Replacement",
         "component-ref": doc(firestore, "components", componentId),
@@ -121,6 +130,8 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -300,7 +311,12 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading && (
+            <div className="h-wit w-fit rounded-full p-0.5">
+              <LoaderCircleIcon className="h-4 w-4 animate-spin" />
+            </div>
+          )}
           Submit
         </Button>
       </form>

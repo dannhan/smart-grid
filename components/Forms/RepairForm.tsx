@@ -152,7 +152,7 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
         <Button type="submit" className="w-full" disabled={loading}>
           {loading && (
             <div className="h-wit w-fit rounded-full p-0.5">
-              <LoaderCircleIcon className="h-4 w-4 animate-spin text-primary" />
+              <LoaderCircleIcon className="h-4 w-4 animate-spin" />
             </div>
           )}
           Submit
