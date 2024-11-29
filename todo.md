@@ -1,3 +1,3 @@
-- [ ] implement form functionality
 - [ ] implement image uploading
+- [ ] better calendar
 - [ ] implement AR

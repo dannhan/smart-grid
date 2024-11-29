@@ -2,12 +2,25 @@
 
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
+import {
+  doc,
+  addDoc,
+  updateDoc,
+  collection,
+  Timestamp,
+} from "firebase/firestore";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { CloudUploadIcon, PaperclipIcon, CalendarIcon } from "lucide-react";
+import {
+  CloudUploadIcon,
+  PaperclipIcon,
+  CalendarIcon,
+  LoaderCircleIcon,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/shadcn/button";
@@ -19,7 +32,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/shadcn/form";
 import {
   FileInput,
@@ -34,13 +46,20 @@ import {
   PopoverTrigger,
 } from "@/components/shadcn/popover";
 
+import { revalidateHistory } from "@/actions/revalidateHistory";
+
+import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
+import { formatName } from "@/lib/utils";
+import { firestore } from "@/lib/firebase/database";
+
 const formSchema = z.object({
-  brand: z.string(),
-  voltage: z.string(),
-  "max.-current": z.string(),
-  "warranty-exp.": z.coerce.date(),
-  image: z.string().optional(),
-  description: z.string().optional(),
+  brand: z.string().min(1),
+  voltage: z.string().min(1),
+  "max-current": z.string().min(1),
+  warranty: z.coerce.date(),
+  // TODO: is optional a better way?
+  image: z.string(),
+  description: z.string().min(0),
 });
 
 interface Props {
@@ -50,8 +69,10 @@ interface Props {
 // TODO:
 // handle file upload
 // fetch data for default value
-const SocketChangeForm: React.FC<Props> = () => {
+const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
   const [files, setFiles] = React.useState<File[] | null>(null);
+  const [loading, setLoading] = React.useState(false);
+  const router = useRouter();
 
   const dropZoneConfig = {
     maxSize: 1024 * 1024 * 4,
@@ -64,23 +85,56 @@ const SocketChangeForm: React.FC<Props> = () => {
     defaultValues: {
       brand: "",
       voltage: "",
-      "max.-current": "",
-      "warranty-exp.": new Date(),
+      "max-current": "",
       description: "",
+      image: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
-      );
+      setLoading(true);
+
+      const data: RepairHistory = {
+        "action-type": "Replacement",
+        "component-ref": doc(firestore, "components", componentId),
+        "component-name": formatName(componentId),
+        date: Timestamp.now(),
+        description: values.description,
+        image: values.image,
+        "technical-specification": [],
+      };
+
+      const specification: Record<string, string>[] = Object.entries(values)
+        .filter(([key]) => key !== "image" && key !== "description")
+        .map(([key, value]) => {
+          if (key === "warranty")
+            return { "warranty-exp.": format(value as Date, "dd MMMM yyyy") };
+          if (key === "max-current")
+            return { "max.-current": String(value) } as Record<string, string>;
+
+          return { [key]: String(value) };
+        });
+
+      data["technical-specification"] = specification;
+
+      repairHistorySchema.parse(data);
+      // TODO: what if one of this fail?
+      await Promise.all([
+        addDoc(collection(firestore, "repair-histories"), data),
+        updateDoc(doc(firestore, "components", componentId), {
+          properties: specification,
+        }),
+      ]);
+      await revalidateHistory();
+
+      router.push("./");
+      toast.success("Form submitted.");
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -130,7 +184,6 @@ const SocketChangeForm: React.FC<Props> = () => {
                   </FileUploaderContent>
                 </FileUploader>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -147,7 +200,6 @@ const SocketChangeForm: React.FC<Props> = () => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -164,14 +216,13 @@ const SocketChangeForm: React.FC<Props> = () => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
 
         <FormField
           control={form.control}
-          name="max.-current"
+          name="max-current"
           render={({ field }) => (
             <FormItem className="grid grid-cols-[90px,1fr] items-center gap-4 space-y-0">
               <FormLabel>Max. Current</FormLabel>
@@ -181,14 +232,13 @@ const SocketChangeForm: React.FC<Props> = () => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
 
         <FormField
           control={form.control}
-          name="warranty-exp."
+          name="warranty"
           render={({ field }) => (
             <FormItem className="grid grid-cols-[90px,1fr] items-center gap-4 space-y-0">
               <FormLabel>Warranty Exp.</FormLabel>
@@ -198,6 +248,7 @@ const SocketChangeForm: React.FC<Props> = () => {
                     <div className="flex w-full items-center gap-2">
                       <span>:</span>
                       <Button
+                        type="button"
                         variant="outline"
                         className={cn(
                           "w-full justify-start bg-card pl-3 text-left font-normal",
@@ -223,8 +274,6 @@ const SocketChangeForm: React.FC<Props> = () => {
                   />
                 </PopoverContent>
               </Popover>
-
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -238,11 +287,15 @@ const SocketChangeForm: React.FC<Props> = () => {
               <FormControl>
                 <Textarea className="min-h-32 border-2" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading && (
+            <div className="h-wit w-fit rounded-full p-0.5">
+              <LoaderCircleIcon className="h-4 w-4 animate-spin" />
+            </div>
+          )}
           Submit
         </Button>
       </form>

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import { addDoc, collection, doc, Timestamp } from "firebase/firestore";
 import * as z from "zod";
@@ -16,7 +17,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/shadcn/form";
 import {
   FileInput,
@@ -25,6 +25,8 @@ import {
   FileUploaderItem,
 } from "@/components/shadcn/file-upload";
 import { Textarea } from "@/components/shadcn/textarea";
+
+import { revalidateHistory } from "@/actions/revalidateHistory";
 
 import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
@@ -45,6 +47,7 @@ interface Props {
 const RepairForm: React.FC<Props> = ({ componentId }) => {
   const [loading, setLoading] = React.useState(false);
   const [files, setFiles] = React.useState<File[] | null>(null);
+  const router = useRouter();
 
   const dropZoneConfig = {
     maxFiles: 1,
@@ -74,7 +77,9 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
 
       repairHistorySchema.parse(data);
       await addDoc(collection(firestore, "repair-histories"), data);
+      await revalidateHistory();
 
+      router.push("./");
       toast.success("Form submitted.");
     } catch (error) {
       console.error("Form submission error", error);
@@ -131,7 +136,6 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
                   </FileUploaderContent>
                 </FileUploader>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -145,7 +149,6 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
               <FormControl>
                 <Textarea className="min-h-32 border-2" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />

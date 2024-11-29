@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import {
   doc,
@@ -31,7 +32,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/shadcn/form";
 import {
   FileInput,
@@ -45,6 +45,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/shadcn/popover";
+
+import { revalidateHistory } from "@/actions/revalidateHistory";
 
 import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
@@ -70,6 +72,7 @@ interface Props {
 const LampChangeForm: React.FC<Props> = ({ componentId }) => {
   const [files, setFiles] = React.useState<File[] | null>(null);
   const [loading, setLoading] = React.useState(false);
+  const router = useRouter();
 
   const dropZoneConfig = {
     maxSize: 1024 * 1024 * 4,
@@ -84,7 +87,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
       voltage: "",
       power: "",
       lumens: "",
-      warranty: new Date(),
       description: "",
       image: "",
     },
@@ -94,8 +96,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setLoading(true);
-
-      await new Promise((resolve) => setTimeout(resolve, 3000));
 
       const data: RepairHistory = {
         "action-type": "Replacement",
@@ -125,7 +125,9 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
           properties: specification,
         }),
       ]);
+      await revalidateHistory();
 
+      router.push("./");
       toast.success("Form submitted.");
     } catch (error) {
       console.error("Form submission error", error);
@@ -181,7 +183,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
                   </FileUploaderContent>
                 </FileUploader>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -198,7 +199,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -215,7 +215,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -232,7 +231,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -249,7 +247,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
                   <Input {...field} />
                 </div>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -292,8 +289,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
                   />
                 </PopoverContent>
               </Popover>
-
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -307,7 +302,6 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
               <FormControl>
                 <Textarea className="min-h-32 border-2" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
