@@ -40,14 +40,20 @@ const ElectricComponentCard: React.FC<Component> = ({
       <CardContent className="flex w-full flex-1 gap-3">
         <ul>
           {properties.map((property: Record<string, string>) => (
-            <li key={JSON.stringify(property)} className="capitalize leading-8">
+            <li
+              key={JSON.stringify(property)}
+              className="line-clamp-1 capitalize leading-8"
+            >
               {Object.keys(property)[0].replace("-", " ")}
             </li>
           ))}
         </ul>
         <ul>
           {properties.map((property: Record<string, string>) => (
-            <li key={JSON.stringify(property)} className="capitalize leading-8">
+            <li
+              key={JSON.stringify(property)}
+              className="line-clamp-1 capitalize leading-8"
+            >
               : {Object.values(property)[0].replace("-", " ")}
             </li>
           ))}
