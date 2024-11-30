@@ -7,8 +7,12 @@ import {
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
+import { UTApi } from "uploadthing/server";
+
 import { firestore } from "@/lib/firebase/database";
 import { RepairHistory } from "@/lib/schema";
+
+const utapi = new UTApi();
 
 export async function seedLamps() {
   const obj = {
@@ -116,9 +120,14 @@ export async function seedRooms() {
 export async function seedHistory() {
   const repairHistoriesCollection = collection(firestore, "repair-histories");
   const snapshot = await getDocs(repairHistoriesCollection);
-  const deletePromises = snapshot.docs.map((docSnapshot) =>
-    deleteDoc(docSnapshot.ref),
-  );
+  const deletePromises = snapshot.docs.map(async (docSnapshot) => {
+    const imageUrl = docSnapshot.data().imageKey as string | undefined;
+    if (imageUrl) {
+      await utapi.deleteFiles(imageUrl); // Ensure the file deletion is awaited
+    }
+
+    await deleteDoc(docSnapshot.ref); // Ensure the document deletion is awaited
+  });
 
   await Promise.all(deletePromises); // Ensure all deletions are complete before proceeding
   await addDoc(repairHistoriesCollection, {
@@ -128,7 +137,7 @@ export async function seedHistory() {
     "component-ref": doc(firestore, "components", "lamp-a"),
     "action-type": "Repair",
     description: "Replaced broken light",
-    image: "-",
+    image: "",
   } satisfies RepairHistory);
   await addDoc(repairHistoriesCollection, {
     date: Timestamp.fromDate(new Date(2024, 4, 15)),
@@ -141,9 +150,9 @@ export async function seedHistory() {
       { power: "15 watt" },
       { lumens: "1400" },
       { voltage: "220 volt" },
-      // TODO: warranty
+      // TODO: warranty, what?
       { "warranty-exp.": "12 Apr 2025" },
     ],
-    image: "-",
+    image: "",
   } satisfies RepairHistory);
 }

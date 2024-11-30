@@ -21,6 +21,7 @@
     "@radix-ui/react-switch": "^1.1.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tanstack/react-table": "^8.20.5",
+    "@uploadthing/react": "^7.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -37,6 +38,7 @@
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^7.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

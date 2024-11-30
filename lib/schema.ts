@@ -34,4 +34,7 @@ export const repairHistorySchema = z.discriminatedUnion("action-type", [
   nonRepairSchema,
 ]);
 
-export type RepairHistory = z.infer<typeof repairHistorySchema>;
+// TODO: might change image to be an object that contain the properties of the image
+export type RepairHistory = z.infer<typeof repairHistorySchema> & {
+  imageKey?: string;
+};

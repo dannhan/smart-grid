@@ -32,6 +32,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/shadcn/form";
 import {
   FileInput,
@@ -51,14 +52,21 @@ import { revalidateHistory } from "@/actions/revalidateHistory";
 import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
 import { firestore } from "@/lib/firebase/database";
+import { uploadFiles } from "@/lib/uploadthing";
 
+// TODO: allow only image to be uploaded!
 const formSchema = z.object({
+  image: z
+    .instanceof(File)
+    .optional()
+    .refine((file) => file instanceof File, {
+      message: "Please upload a valid image file.",
+    }),
   brand: z.string().min(1),
   voltage: z.string().min(1),
   "max-current": z.string().min(1),
   warranty: z.coerce.date(),
   // TODO: is optional a better way?
-  image: z.string(),
   description: z.string().min(0),
 });
 
@@ -70,7 +78,6 @@ interface Props {
 // handle file upload
 // fetch data for default value
 const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
-  const [files, setFiles] = React.useState<File[] | null>(null);
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -87,7 +94,6 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
       voltage: "",
       "max-current": "",
       description: "",
-      image: "",
     },
   });
 
@@ -95,14 +101,19 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
     try {
       setLoading(true);
 
+      const uploadedFiles = await uploadFiles("image", {
+        files: [values.image],
+      });
+
       const data: RepairHistory = {
         "action-type": "Replacement",
         "component-ref": doc(firestore, "components", componentId),
         "component-name": formatName(componentId),
         date: Timestamp.now(),
-        description: values.description,
-        image: values.image,
+        image: uploadedFiles[0].url,
+        imageKey: uploadedFiles[0].key,
         "technical-specification": [],
+        description: values.description,
       };
 
       const specification: Record<string, string>[] = Object.entries(values)
@@ -147,13 +158,14 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
         <FormField
           control={form.control}
           name="image"
-          // render={({ field }) => (
-          render={() => (
+          render={({ field }) => (
             <FormItem>
               <FormControl>
                 <FileUploader
-                  value={files}
-                  onValueChange={setFiles}
+                  value={field.value ? [field.value] : []}
+                  onValueChange={(files) =>
+                    field.onChange(files ? files[0] : [])
+                  }
                   dropzoneOptions={dropZoneConfig}
                   className="relative rounded-lg bg-card"
                 >
@@ -173,17 +185,16 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
                     </div>
                   </FileInput>
                   <FileUploaderContent>
-                    {files &&
-                      files.length > 0 &&
-                      files.map((file, i) => (
-                        <FileUploaderItem key={i} index={i}>
-                          <PaperclipIcon className="h-4 w-4 stroke-current" />
-                          <span>{file.name}</span>
-                        </FileUploaderItem>
-                      ))}
+                    {field.value && (
+                      <FileUploaderItem index={0}>
+                        <PaperclipIcon className="h-4 w-4 stroke-current" />
+                        <span>{field.value.name}</span>
+                      </FileUploaderItem>
+                    )}
                   </FileUploaderContent>
                 </FileUploader>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

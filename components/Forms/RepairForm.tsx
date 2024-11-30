@@ -17,6 +17,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/shadcn/form";
 import {
   FileInput,
@@ -28,13 +29,20 @@ import { Textarea } from "@/components/shadcn/textarea";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
+import { firestore } from "@/lib/firebase/database";
 import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
-import { firestore } from "@/lib/firebase/database";
+import { uploadFiles } from "@/lib/uploadthing";
 
+// TODO: allow only image to be uploaded!
 const formSchema = z.object({
-  image: z.string().min(0),
-  description: z.string().min(0),
+  image: z
+    .instanceof(File)
+    .optional()
+    .refine((file) => file instanceof File, {
+      message: "Please upload a valid image file.",
+    }),
+  description: z.string().min(1, "Description is required."),
 });
 
 interface Props {
@@ -46,19 +54,18 @@ interface Props {
 // handle file upload
 const RepairForm: React.FC<Props> = ({ componentId }) => {
   const [loading, setLoading] = React.useState(false);
-  const [files, setFiles] = React.useState<File[] | null>(null);
   const router = useRouter();
 
   const dropZoneConfig = {
     maxFiles: 1,
-    maxSize: 1024 * 1024 * 4,
+    maxSize: 1024 * 1024 * 4, // 4MB
     multiple: false,
   };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       description: "",
-      image: "",
     },
   });
 
@@ -67,20 +74,27 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
     try {
       setLoading(true);
 
+      const uploadedFiles = await uploadFiles("image", {
+        files: [values.image],
+      });
+
       const data: RepairHistory = {
         "action-type": "Repair",
         date: Timestamp.now(),
         "component-name": formatName(componentId),
         "component-ref": doc(firestore, "components", componentId),
-        ...values,
+        image: uploadedFiles[0].url,
+        imageKey: uploadedFiles[0].key,
+        description: values.description,
       };
 
+      // TODO: what happened if parse failed but image uploaded
       repairHistorySchema.parse(data);
       await addDoc(collection(firestore, "repair-histories"), data);
       await revalidateHistory();
 
       router.push("./");
-      toast.success("Form submitted.");
+      toast.success("Form submitted successfully.");
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -98,14 +112,14 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
         <FormField
           control={form.control}
           name="image"
-          // render={({ field }) => (
-          render={() => (
+          render={({ field }) => (
             <FormItem>
-              {/* TODO:*/}
               <FormControl>
                 <FileUploader
-                  value={files}
-                  onValueChange={setFiles}
+                  value={field.value ? [field.value] : []}
+                  onValueChange={(files) =>
+                    field.onChange(files ? files[0] : [])
+                  }
                   dropzoneOptions={dropZoneConfig}
                   className="relative rounded-lg bg-card"
                 >
@@ -125,17 +139,16 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
                     </div>
                   </FileInput>
                   <FileUploaderContent>
-                    {files &&
-                      files.length > 0 &&
-                      files.map((file, i) => (
-                        <FileUploaderItem key={i} index={i}>
-                          <PaperclipIcon className="h-4 w-4 stroke-current" />
-                          <span>{file.name}</span>
-                        </FileUploaderItem>
-                      ))}
+                    {field.value && (
+                      <FileUploaderItem index={0}>
+                        <PaperclipIcon className="h-4 w-4 stroke-current" />
+                        <span>{field.value.name}</span>
+                      </FileUploaderItem>
+                    )}
                   </FileUploaderContent>
                 </FileUploader>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
