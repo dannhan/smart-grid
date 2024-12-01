@@ -14,7 +14,6 @@ import {
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { format } from "date-fns";
 import { LoaderCircleIcon } from "lucide-react";
 
 import { Button } from "@/components/shadcn/button";
@@ -22,7 +21,6 @@ import { Form } from "@/components/shadcn/form";
 import ImageForm from "./FormElement/ImageForm";
 import InputForm from "./FormElement/InputForm";
 import TextareaForm from "./FormElement/TextareaForm";
-import DatePickerForm from "./FormElement/DatePickerForm";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
@@ -40,10 +38,9 @@ const formSchema = z.object({
       message: "Please upload a valid image file.",
     }),
   brand: z.string().min(1),
-  voltage: z.string().min(1),
-  power: z.string().min(1),
-  lumens: z.string().min(1),
-  warranty: z.coerce.date(),
+  type: z.string().min(1),
+  area: z.string().min(1),
+  ampacity: z.string().min(1),
   description: z.string().min(0),
 });
 
@@ -54,7 +51,7 @@ interface Props {
 // TODO:
 // handle file upload
 // fetch data for default value
-const LampChangeForm: React.FC<Props> = ({ componentId }) => {
+const WireChangeForm: React.FC<Props> = ({ componentId }) => {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -63,14 +60,14 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       brand: "",
-      voltage: "",
-      power: "",
-      lumens: "",
+      type: "",
+      area: "",
+      ampacity: "",
       description: "",
     },
   });
 
-  // TODO: change this into server action
+  // TODO:
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setLoading(true);
@@ -92,16 +89,13 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
 
       const specification: Record<string, string>[] = Object.entries(values)
         .filter(([key]) => key !== "image" && key !== "description")
-        .map(([key, value]) =>
-          key === "warranty"
-            ? { "warranty-exp.": format(value as Date, "dd MMMM yyyy") }
-            : { [key]: String(value) },
-        );
+        .map(([key, value]) => {
+          return { [key]: String(value) };
+        });
+
       data["technical-specification"] = specification;
 
-      // TODO: what happened if parse failed but image uploaded
       repairHistorySchema.parse(data);
-
       // TODO: what if one of this fail?
       await Promise.all([
         addDoc(collection(firestore, "repair-histories"), data),
@@ -129,10 +123,9 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
       >
         <ImageForm form={form} name="image" />
         <InputForm form={form} name="brand" />
-        <InputForm form={form} name="voltage" />
-        <InputForm form={form} name="power" />
-        <InputForm form={form} name="lumens" />
-        <DatePickerForm form={form} name="warranty" label="Warranty Exp." />
+        <InputForm form={form} name="type" />
+        <InputForm form={form} name="area" />
+        <InputForm form={form} name="ampacity" />
         <TextareaForm form={form} name="description" />
         <Button type="submit" className="w-full" disabled={loading}>
           {loading && (
@@ -147,4 +140,4 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
   );
 };
 
-export default LampChangeForm;
+export default WireChangeForm;

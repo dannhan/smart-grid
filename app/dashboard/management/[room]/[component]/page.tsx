@@ -14,6 +14,7 @@ import {
 import RepairForm from "@/components/Forms/RepairForm";
 import LampChangeForm from "@/components/Forms/LampChangeForm";
 import SocketChangeForm from "@/components/Forms/SocketChangeForm";
+import WireChangeForm from "@/components/Forms/WireChangeForm";
 
 // TODO: searchParams and route type safety
 interface Props {
@@ -50,6 +51,8 @@ const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
             <LampChangeForm componentId={component} />
           ) : type === "socket" ? (
             <SocketChangeForm componentId={component} />
+          ) : type === "wire" ? (
+            <WireChangeForm componentId={component} />
           ) : (
             <p>Type Unknown</p>
           )}

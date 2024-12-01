@@ -8,24 +8,12 @@ import { addDoc, collection, doc, Timestamp } from "firebase/firestore";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { CloudUploadIcon, PaperclipIcon, LoaderCircleIcon } from "lucide-react";
+import { LoaderCircleIcon } from "lucide-react";
 
 import { Button } from "@/components/shadcn/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/shadcn/form";
-import {
-  FileInput,
-  FileUploader,
-  FileUploaderContent,
-  FileUploaderItem,
-} from "@/components/shadcn/file-upload";
-import { Textarea } from "@/components/shadcn/textarea";
+import { Form } from "@/components/shadcn/form";
+import ImageForm from "./FormElement/ImageForm";
+import TextareaForm from "./FormElement/TextareaForm";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
@@ -55,12 +43,6 @@ interface Props {
 const RepairForm: React.FC<Props> = ({ componentId }) => {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
-
-  const dropZoneConfig = {
-    maxFiles: 1,
-    maxSize: 1024 * 1024 * 4, // 4MB
-    multiple: false,
-  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -109,62 +91,8 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto max-w-3xl space-y-4"
       >
-        <FormField
-          control={form.control}
-          name="image"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <FileUploader
-                  value={field.value ? [field.value] : []}
-                  onValueChange={(files) =>
-                    field.onChange(files ? files[0] : [])
-                  }
-                  dropzoneOptions={dropZoneConfig}
-                  className="relative rounded-lg bg-card"
-                >
-                  <FileInput
-                    id="fileInput"
-                    className="border-2 bg-muted/40 hover:bg-muted"
-                  >
-                    <div className="flex w-full flex-col items-center justify-center p-8">
-                      <CloudUploadIcon className="h-10 w-10 text-gray-500" />
-                      <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold">Click to upload</span>
-                        &nbsp; or drag and drop
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        SVG, PNG, JPG or GIF
-                      </p>
-                    </div>
-                  </FileInput>
-                  <FileUploaderContent>
-                    {field.value && (
-                      <FileUploaderItem index={0}>
-                        <PaperclipIcon className="h-4 w-4 stroke-current" />
-                        <span>{field.value.name}</span>
-                      </FileUploaderItem>
-                    )}
-                  </FileUploaderContent>
-                </FileUploader>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description:</FormLabel>
-              <FormControl>
-                <Textarea className="min-h-32 border-2" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <ImageForm form={form} name="image" />
+        <TextareaForm form={form} name="description" />
         <Button type="submit" className="w-full" disabled={loading}>
           {loading && (
             <div className="h-wit w-fit rounded-full p-0.5">

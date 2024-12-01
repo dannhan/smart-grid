@@ -3,9 +3,9 @@ import {
   doc,
   collection,
   setDoc,
-  Timestamp,
   getDocs,
   deleteDoc,
+  Timestamp,
 } from "firebase/firestore";
 import { UTApi } from "uploadthing/server";
 
@@ -41,6 +41,10 @@ export async function seedLamps() {
     name: "Lamp D",
     ...obj,
   });
+  await setDoc(doc(firestore, "components", "corridor-lamp"), {
+    name: "Corridor Lamp",
+    ...obj,
+  });
 }
 
 export async function seedSockets() {
@@ -71,9 +75,26 @@ export async function seedSockets() {
   });
 }
 
+async function seedWire() {
+  const obj = {
+    type: "wire",
+    properties: [
+      { brand: "Suprem" },
+      { type: "NYA" },
+      { area: "4 mm2" },
+      { ampacity: "61 Ampere" },
+    ],
+  };
+  await setDoc(doc(firestore, "components", "wire"), {
+    name: "Wire",
+    ...obj,
+  });
+}
+
 export async function seedComponents() {
   await seedLamps();
   await seedSockets();
+  await seedWire();
 }
 
 export async function seedRooms() {
@@ -110,7 +131,15 @@ export async function seedRooms() {
         doc(firestore, "components", "lamp-d"),
         doc(firestore, "components", "socket-d"),
       ],
-      date_created: now,
+      "date-created": now,
+    }),
+    setDoc(doc(firestore, "rooms", "others"), {
+      name: "Others",
+      componentsRef: [
+        doc(firestore, "components", "corridor-lamp"),
+        doc(firestore, "components", "wire"),
+      ],
+      "date-created": now,
     }),
   ]);
 
