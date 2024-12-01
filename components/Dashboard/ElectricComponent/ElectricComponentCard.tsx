@@ -2,8 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { ImageIcon } from "lucide-react";
-
 import type { Component } from "@/types";
 import {
   Card,
@@ -16,6 +14,7 @@ import { Button } from "@/components/shadcn/button";
 import Lamp from "@/components/Icon/Lamp";
 import Socket from "@/components/Icon/Socket";
 import Wire from "@/components/Icon/Wire";
+import MCB from "@/components/Icon/MCB";
 
 const ElectricComponentCard: React.FC<Component> = ({
   id,
@@ -29,7 +28,7 @@ const ElectricComponentCard: React.FC<Component> = ({
     lamp: Lamp,
     socket: Socket,
     wire: Wire,
-    mcb: ImageIcon,
+    mcb: MCB,
   }[type];
 
   return (

@@ -91,10 +91,54 @@ async function seedWire() {
   });
 }
 
+async function seedMCB() {
+  const obj = {
+    type: "mcb",
+    properties: [
+      { brand: "Schneider" },
+      { type: "3p" },
+      { protection: "Overload & Short Circuit" },
+      { "rated-current": "5 Ampere" },
+    ],
+  };
+  await setDoc(doc(firestore, "components", "mcb"), {
+    name: "MCB",
+    "rated-current": "20 Ampere",
+    type: "mcb",
+    properties: [
+      { brand: "Schneider" },
+      { type: "3p" },
+      { protection: "Overload & Short Circuit" },
+      { "rated-current": "20 Ampere" },
+    ],
+  });
+  await setDoc(doc(firestore, "components", "mcb-a"), {
+    name: "MCB A",
+    "rated-current": "5 Ampere",
+    ...obj,
+  });
+  await setDoc(doc(firestore, "components", "mcb-b"), {
+    name: "MCB B",
+    "rated-current": "5 Ampere",
+    ...obj,
+  });
+  await setDoc(doc(firestore, "components", "mcb-c"), {
+    name: "MCB C",
+    "rated-current": "5 Ampere",
+    ...obj,
+  });
+  await setDoc(doc(firestore, "components", "mcb-d"), {
+    name: "MCB D",
+    "rated-current": "5 Ampere",
+    ...obj,
+  });
+}
+
 export async function seedComponents() {
   await seedLamps();
   await seedSockets();
   await seedWire();
+  await seedMCB();
 }
 
 export async function seedRooms() {
@@ -130,6 +174,17 @@ export async function seedRooms() {
       componentsRef: [
         doc(firestore, "components", "lamp-d"),
         doc(firestore, "components", "socket-d"),
+      ],
+      "date-created": now,
+    }),
+    setDoc(doc(firestore, "rooms", "main-panel"), {
+      name: "Others",
+      componentsRef: [
+        doc(firestore, "components", "mcb"),
+        doc(firestore, "components", "mcb-a"),
+        doc(firestore, "components", "mcb-b"),
+        doc(firestore, "components", "mcb-c"),
+        doc(firestore, "components", "mcb-d"),
       ],
       "date-created": now,
     }),

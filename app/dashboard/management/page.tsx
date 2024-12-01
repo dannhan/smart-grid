@@ -38,6 +38,23 @@ const ControlPage = () => {
         ))}
         <Card className="relative">
           <Link
+            href={`management/main-panel`}
+            className="absolute h-full w-full max-sm:hidden"
+          />
+          <CardContent className="flex h-[152px] items-center justify-around gap-4 px-5 py-0 text-xl">
+            <ChevronRightIcon
+              className="absolute right-4 top-3 size-5"
+              strokeWidth={2.5}
+            />
+            <div>
+              <p className="text-4xl font-bold">Main</p>
+              <p className="text-4xl font-bold">Panel</p>
+            </div>
+            <OfficeBuildings />
+          </CardContent>
+        </Card>
+        <Card className="relative">
+          <Link
             href={`management/others`}
             className="absolute h-full w-full max-sm:hidden"
           />
