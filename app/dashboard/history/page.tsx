@@ -8,26 +8,15 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { format } from "date-fns";
-import { ChevronDownIcon } from "lucide-react";
 
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/shadcn/dropdown-menu";
-import { Button } from "@/components/shadcn/button";
 import { columns } from "@/components/HistoryTable/Columns";
 import HistoryTable from "@/components/HistoryTable/HistoryTable";
-import Pdf from "@/components/Icon/Pdf";
-import Csv from "@/components/Icon/Csv";
 
 import { repairHistorySchema, type RepairHistory } from "@/lib/schema";
 import { firestore } from "@/lib/firebase/database";
@@ -57,6 +46,7 @@ const HistoryPage: FC = async () => {
     console.log(parsed.error.format());
   });
 
+  // TODO: this type is very wrong
   const data = (await Promise.all(promises)) as RepairHistory[];
 
   return (
@@ -68,30 +58,6 @@ const HistoryPage: FC = async () => {
         <CardContent className="py-6">
           <HistoryTable columns={columns} data={data} />
         </CardContent>
-        <CardFooter>
-          {/* TODO: create dedicated component for this? */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="relative w-full font-semibold">
-                <span>Print</span>
-                <ChevronDownIcon className="absolute right-3" strokeWidth={3} />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="rounded-xl border-2 border-primary"
-            >
-              <DropdownMenuItem className="items-center">
-                <Pdf />
-                <span>PDF</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="items-center">
-                <Csv />
-                <span>CSV</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </CardFooter>
       </Card>
     </main>
   );
