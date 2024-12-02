@@ -123,8 +123,8 @@ const ARMarker: React.FC = () => {
     return (
       <div
         style={{
-          width: "100%",
-          height: "500px",
+          width: "100vw",
+          height: "100svh",
           position: "relative",
         }}
       >
@@ -137,8 +137,8 @@ const ARMarker: React.FC = () => {
     <div
       ref={sceneRef}
       style={{
-        width: "100%",
-        height: "500px",
+        width: "100vw",
+        height: "100svh",
         position: "relative",
       }}
     >

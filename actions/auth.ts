@@ -17,7 +17,7 @@ export async function login(_: { message: string }, formData: FormData) {
   }
 
   try {
-    const snap = await getDoc(doc(firestore, "user", String(username)));
+    const snap = await getDoc(doc(firestore, "users", String(username)));
     if (!snap.exists()) return { message: "Invalid credential." };
 
     const user = { id: snap.id, ...snap.data() };
