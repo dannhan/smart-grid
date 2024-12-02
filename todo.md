@@ -1,4 +1,4 @@
-- [ ] implement image uploading
+- [ ] implement form for main panel
 - [ ] better calendar
 - [ ] implement AR
 

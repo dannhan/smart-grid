@@ -38,3 +38,16 @@ export const repairHistorySchema = z.discriminatedUnion("action-type", [
 export type RepairHistory = z.infer<typeof repairHistorySchema> & {
   imageKey?: string;
 };
+
+export const userSchema = z.object({
+  id: z.string(),
+  name: z.string().min(1).max(50),
+  password: z.string().min(5).max(128),
+  image: z
+    .object({
+      imageUrl: z.string(),
+      imageKey: z.string(),
+    })
+    .optional(),
+  role: z.enum(["user", "admin"]), // Example role for scalability
+});
