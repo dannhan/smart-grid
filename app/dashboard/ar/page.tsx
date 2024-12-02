@@ -1,7 +1,18 @@
-import { type NextPage } from "next";
+"use client";
 
-const ARPage: NextPage = () => {
-  return <h1>Hello Dunia</h1>;
-};
+import dynamic from "next/dynamic";
 
-export default ARPage;
+const ARMarkerWrapper = dynamic(
+  () => import("@/components/AR/ARMarkerWrapper"),
+  {
+    ssr: false,
+  },
+);
+
+export default function Home() {
+  return (
+    <main>
+      <ARMarkerWrapper />
+    </main>
+  );
+}

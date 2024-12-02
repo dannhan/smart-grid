@@ -70,4 +70,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  video {
+    @apply max-w-[initial]
+  }
 }
