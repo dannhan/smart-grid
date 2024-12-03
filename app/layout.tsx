@@ -18,7 +18,7 @@ const RootLayout: FC<PropsWithChildren> = async ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body className={`${lato.className} antialiased`} suppressHydrationWarning>
       <BaseLayout>{children}</BaseLayout>
-      <Toaster />
+      <Toaster richColors expand />
       <TailwindIndicator />
     </body>
   </html>
