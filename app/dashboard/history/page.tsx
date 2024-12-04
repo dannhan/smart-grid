@@ -18,7 +18,8 @@ import {
 import { columns } from "@/components/HistoryTable/Columns";
 import HistoryTable from "@/components/HistoryTable/HistoryTable";
 
-import { repairHistorySchema, type RepairHistory } from "@/lib/schema";
+import type { RepairHistory } from "@/types";
+import { repairHistorySchema } from "@/lib/schema";
 import { firestore } from "@/lib/firebase/database";
 
 const HistoryPage: FC = async () => {
@@ -34,11 +35,11 @@ const HistoryPage: FC = async () => {
 
       return {
         date: formattedDate,
-        "action-type": parsed.data["action-type"],
-        "component-name": parsed.data["component-name"],
-        description: parsed.data["description"],
-        image: parsed.data["image"],
-        "technical-specification": parsed.data["technical-specification"],
+        actionType: parsed.data.actionType,
+        componentName: parsed.data.componentName,
+        description: parsed.data.description,
+        image: parsed.data.image,
+        technicalSpecification: parsed.data.technicalSpecification,
       };
     }
 

@@ -72,6 +72,6 @@
   }
 
   video {
-    @apply max-w-[initial]
+    @apply max-w-[initial];
   }
 }

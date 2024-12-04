@@ -9,31 +9,31 @@ export default async function seedRooms() {
     ...rooms.map((room) => {
       return setDoc(doc(firestore, "rooms", `room-${room}`), {
         name: room.toUpperCase(),
-        componentsRef: [
+        componentRefs: [
           doc(firestore, "components", `lamp-${room}`),
           doc(firestore, "components", `socket-${room}`),
         ],
-        "date-created": now,
+        dateCreated: now,
       });
     }),
     setDoc(doc(firestore, "rooms", "main-panel"), {
       name: "Others",
-      componentsRef: [
+      componentRefs: [
         doc(firestore, "components", "mcb"),
         doc(firestore, "components", "mcb-a"),
         doc(firestore, "components", "mcb-b"),
         doc(firestore, "components", "mcb-c"),
         doc(firestore, "components", "mcb-d"),
       ],
-      "date-created": now,
+      dateCreated: now,
     }),
     setDoc(doc(firestore, "rooms", "others"), {
       name: "Others",
-      componentsRef: [
+      componentRefs: [
         doc(firestore, "components", "corridor-lamp"),
         doc(firestore, "components", "wire"),
       ],
-      "date-created": now,
+      dateCreated: now,
     }),
   ]);
 

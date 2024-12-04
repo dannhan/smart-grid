@@ -3,7 +3,8 @@ import { twMerge } from "tailwind-merge";
 
 import { Row } from "@tanstack/react-table";
 import { mkConfig, generateCsv, download } from "export-to-csv";
-import type { RepairHistory } from "@/lib/schema";
+
+import type { RepairHistory } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,11 +29,11 @@ const csvConfig = mkConfig({
 export function exportExcel(rows: Row<RepairHistory>[]) {
   const rowData = rows.map((row) => ({
     Date: row.original.date as string,
-    "Action Type": row.original["action-type"],
-    "Component Name": row.original["component-name"],
+    "Action Type": row.original.actionType,
+    "Component Name": row.original.componentName,
     Description: row.original.description,
-    "Technical Specification": row.original["technical-specification"]
-      ? row.original["technical-specification"]
+    "Technical Specification": row.original.technicalSpecification
+      ? row.original.technicalSpecification
           .map((item) => {
             const [key] = Object.keys(item);
             const value = item[key];
@@ -50,9 +51,15 @@ export function exportExcel(rows: Row<RepairHistory>[]) {
           })
           .join("\n")
       : "-",
-    Image: row.original.image || "-",
+    Image: row.original.image.key || "-",
   }));
 
   const csv = generateCsv(csvConfig)(rowData);
   download(csvConfig)(csv);
+}
+
+export function formatCamelCase(input: string) {
+  return input
+    .replace(/([A-Z])/g, " $1") // Add a space before each uppercase letter
+    .replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
 }

@@ -26,7 +26,8 @@ import DatePickerForm from "./FormElement/DatePickerForm";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
-import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
+import type { RepairHistory } from "@/types";
+import { repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
 import { firestore } from "@/lib/firebase/database";
 import { uploadFiles } from "@/lib/uploadthing";
@@ -80,13 +81,15 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
       });
 
       const data: RepairHistory = {
-        "action-type": "Replacement",
-        "component-ref": doc(firestore, "components", componentId),
-        "component-name": formatName(componentId),
+        actionType: "replacement",
+        componentRef: doc(firestore, "components", componentId),
+        componentName: formatName(componentId),
         date: Timestamp.now(),
-        image: uploadedFiles[0].url,
-        imageKey: uploadedFiles[0].key,
-        "technical-specification": [],
+        image: {
+          url: uploadedFiles[0].url,
+          key: uploadedFiles[0].key,
+        },
+        technicalSpecification: [],
         description: values.description,
       };
 
@@ -94,10 +97,10 @@ const LampChangeForm: React.FC<Props> = ({ componentId }) => {
         .filter(([key]) => key !== "image" && key !== "description")
         .map(([key, value]) =>
           key === "warranty"
-            ? { "warranty-exp.": format(value as Date, "dd MMMM yyyy") }
+            ? { warrantyExp: format(value as Date, "dd MMMM yyyy") }
             : { [key]: String(value) },
         );
-      data["technical-specification"] = specification;
+      data.technicalSpecification = specification;
 
       // TODO: what happened if parse failed but image uploaded
       repairHistorySchema.parse(data);

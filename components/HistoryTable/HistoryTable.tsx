@@ -30,7 +30,7 @@ import { Button } from "@/components/shadcn/button";
 import Pdf from "@/components/Icon/Pdf";
 import Csv from "@/components/Icon/Csv";
 
-import type { RepairHistory } from "@/lib/schema";
+import type { RepairHistory } from "@/types";
 
 // TODO: this type is very wrong
 interface HistoryTableProps {

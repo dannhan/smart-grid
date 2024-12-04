@@ -10,8 +10,8 @@ import {
 } from "firebase/firestore";
 import { UTApi } from "uploadthing/server";
 
+import type { RepairHistory } from "@/types";
 import { firestore } from "@/lib/firebase/database";
-import { RepairHistory } from "@/lib/schema";
 
 const utapi = new UTApi();
 
@@ -20,7 +20,7 @@ async function deleteHistories(
 ) {
   const snapshot = await getDocs(repairHistoriesCollection);
   const deletePromises = snapshot.docs.map(async (docSnapshot) => {
-    const imageUrl = docSnapshot.data().imageKey as string | undefined;
+    const imageUrl = docSnapshot.data().image.key as string | undefined;
     if (imageUrl) {
       await utapi.deleteFiles(imageUrl); // Ensure the file deletion is awaited
     }
@@ -37,26 +37,32 @@ export default async function seedHistory() {
   await Promise.all([
     addDoc(repairHistoriesCollection, {
       date: Timestamp.fromDate(new Date(2024, 3, 12)), // Month is 0 index
-      "component-name": "Lamp A",
-      "component-ref": doc(firestore, "components", "lamp-a"),
-      "action-type": "Repair",
+      componentName: "Lamp A",
+      componentRef: doc(firestore, "components", "lamp-a"),
+      actionType: "repair",
       description: "Replaced broken light",
-      image: "",
+      image: {
+        url: "",
+        key: "",
+      },
     } satisfies RepairHistory),
     addDoc(repairHistoriesCollection, {
       date: Timestamp.fromDate(new Date(2024, 4, 15)), // Month is 0 index
-      "component-name": "Lamp A",
-      "component-ref": doc(firestore, "components", "lamp-a"),
-      "action-type": "Replacement",
+      componentName: "Lamp A",
+      componentRef: doc(firestore, "components", "lamp-a"),
+      actionType: "replacement",
       description: "Replaced broken light",
-      "technical-specification": [
+      technicalSpecification: [
         { brand: "Broco" },
         { power: "15 watt" },
         { lumens: "1400" },
         { voltage: "220 volt" },
-        { "warranty-exp.": "12 Apr 2025" },
+        { warrantyExp: "12 Apr 2025" },
       ],
-      image: "",
+      image: {
+        url: "",
+        key: "",
+      },
     } satisfies RepairHistory),
   ]);
 

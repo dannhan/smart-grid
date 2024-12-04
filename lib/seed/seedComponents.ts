@@ -9,19 +9,18 @@ async function seedLampsSocketsAndMcbs() {
     { voltage: "220 volt" },
     { power: "15 watt" },
     { lumens: "1400" },
-    { "warranty-exp.": "12 Apr 2025" },
+    { warrantyExp: "12 Apr 2025" },
   ];
   const socketProperties = [
     { brand: "Broco" },
     { voltage: "220 volt" },
-    { "max.-current": "16 ampere" },
-    { "warranty-exp.": "12 Apr 2025" },
+    { maxCurrent: "16 ampere" },
+    { warrantyExp: "12 Apr 2025" },
   ];
   const mcbProperties = [
     { brand: "Schneider" },
     { type: "3p" },
     { protection: "Overload & Short Circuit" },
-    { "rated-current": "5 Ampere" },
   ];
 
   await Promise.all([
@@ -52,13 +51,13 @@ async function seedLampsSocketsAndMcbs() {
     setDoc(doc(firestore, "components", "mcb"), {
       name: "MCB",
       type: "mcb",
-      properties: { ...mcbProperties, "rated-current": "20 Ampere" },
+      properties: [...mcbProperties, { ratedCurrent: "20 Ampere" }],
     }),
     ...ids.map((id) => {
       return setDoc(doc(firestore, "components", `mcb-${id}`), {
         name: `MCB ${id.toUpperCase()}`,
         type: "mcb",
-        properties: mcbProperties,
+        properties: [...mcbProperties, { ratedCurrent: "5 Ampere" }],
       });
     }),
   ]);

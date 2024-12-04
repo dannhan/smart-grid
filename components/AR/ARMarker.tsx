@@ -36,6 +36,7 @@ const ARMarker: React.FC = () => {
       // Dynamic script loading
       const loadScripts = () => {
         return new Promise<void>((resolve, reject) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           if ((window as any).AFRAME && (window as any).ARjs) {
             resolve();
             return;

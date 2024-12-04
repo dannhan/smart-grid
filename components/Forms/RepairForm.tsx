@@ -17,8 +17,9 @@ import TextareaForm from "./FormElement/TextareaForm";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
+import type { RepairHistory } from "@/types";
+import { repairHistorySchema } from "@/lib/schema";
 import { firestore } from "@/lib/firebase/database";
-import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
 import { uploadFiles } from "@/lib/uploadthing";
 
@@ -61,12 +62,14 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
       });
 
       const data: RepairHistory = {
-        "action-type": "Repair",
+        actionType: "repair",
         date: Timestamp.now(),
-        "component-name": formatName(componentId),
-        "component-ref": doc(firestore, "components", componentId),
-        image: uploadedFiles[0].url,
-        imageKey: uploadedFiles[0].key,
+        componentName: formatName(componentId),
+        componentRef: doc(firestore, "components", componentId),
+        image: {
+          url: uploadedFiles[0].url,
+          key: uploadedFiles[0].key,
+        },
         description: values.description,
       };
 

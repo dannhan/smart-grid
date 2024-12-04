@@ -24,7 +24,8 @@ import TextareaForm from "./FormElement/TextareaForm";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
-import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
+import type { RepairHistory } from "@/types";
+import { repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
 import { firestore } from "@/lib/firebase/database";
 import { uploadFiles } from "@/lib/uploadthing";
@@ -77,13 +78,15 @@ const WireChangeForm: React.FC<Props> = ({ componentId }) => {
       });
 
       const data: RepairHistory = {
-        "action-type": "Replacement",
-        "component-ref": doc(firestore, "components", componentId),
-        "component-name": formatName(componentId),
+        actionType: "replacement",
+        componentRef: doc(firestore, "components", componentId),
+        componentName: formatName(componentId),
         date: Timestamp.now(),
-        image: uploadedFiles[0].url,
-        imageKey: uploadedFiles[0].key,
-        "technical-specification": [],
+        image: {
+          url: uploadedFiles[0].url,
+          key: uploadedFiles[0].key,
+        },
+        technicalSpecification: [],
         description: values.description,
       };
 
@@ -92,8 +95,7 @@ const WireChangeForm: React.FC<Props> = ({ componentId }) => {
         .map(([key, value]) => {
           return { [key]: String(value) };
         });
-
-      data["technical-specification"] = specification;
+      data.technicalSpecification = specification;
 
       repairHistorySchema.parse(data);
       // TODO: what if one of this fail?

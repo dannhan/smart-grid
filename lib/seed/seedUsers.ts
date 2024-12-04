@@ -5,7 +5,7 @@ export default async function seedUsers() {
   const data = {
     name: "Fais Halim",
     password: "12345",
-    image: { imageUrl: "", imageKey: "" },
+    image: { url: "", key: "" },
     role: "user",
   };
 

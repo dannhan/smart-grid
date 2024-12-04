@@ -26,7 +26,8 @@ import DatePickerForm from "./FormElement/DatePickerForm";
 
 import { revalidateHistory } from "@/actions/revalidateHistory";
 
-import { type RepairHistory, repairHistorySchema } from "@/lib/schema";
+import type { RepairHistory } from "@/types";
+import { repairHistorySchema } from "@/lib/schema";
 import { formatName } from "@/lib/utils";
 import { firestore } from "@/lib/firebase/database";
 import { uploadFiles } from "@/lib/uploadthing";
@@ -41,7 +42,7 @@ const formSchema = z.object({
     }),
   brand: z.string().min(1),
   voltage: z.string().min(1),
-  "max-current": z.string().min(1),
+  maxCurrent: z.string().min(1),
   warranty: z.coerce.date(),
   // TODO: is optional a better way?
   description: z.string().min(0),
@@ -64,7 +65,7 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
     defaultValues: {
       brand: "",
       voltage: "",
-      "max-current": "",
+      maxCurrent: "",
       description: "",
     },
   });
@@ -78,13 +79,15 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
       });
 
       const data: RepairHistory = {
-        "action-type": "Replacement",
-        "component-ref": doc(firestore, "components", componentId),
-        "component-name": formatName(componentId),
+        actionType: "replacement",
+        componentRef: doc(firestore, "components", componentId),
+        componentName: formatName(componentId),
         date: Timestamp.now(),
-        image: uploadedFiles[0].url,
-        imageKey: uploadedFiles[0].key,
-        "technical-specification": [],
+        image: {
+          url: uploadedFiles[0].url,
+          key: uploadedFiles[0].key,
+        },
+        technicalSpecification: [],
         description: values.description,
       };
 
@@ -92,14 +95,13 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
         .filter(([key]) => key !== "image" && key !== "description")
         .map(([key, value]) => {
           if (key === "warranty")
-            return { "warranty-exp.": format(value as Date, "dd MMMM yyyy") };
-          if (key === "max-current")
-            return { "max.-current": String(value) } as Record<string, string>;
+            return { warrantyExp: format(value as Date, "dd MMMM yyyy") };
+          if (key === "maxCurrent")
+            return { maxCurrent: String(value) } as Record<string, string>;
 
           return { [key]: String(value) };
         });
-
-      data["technical-specification"] = specification;
+      data.technicalSpecification = specification;
 
       repairHistorySchema.parse(data);
       // TODO: what if one of this fail?
@@ -130,7 +132,7 @@ const SocketChangeForm: React.FC<Props> = ({ componentId }) => {
         <ImageForm form={form} name="image" />
         <InputForm form={form} name="brand" />
         <InputForm form={form} name="voltage" />
-        <InputForm form={form} name="max-current" />
+        <InputForm form={form} name="maxCurrent" />
         <DatePickerForm form={form} name="warranty" label="Warranty Exp." />
         <TextareaForm form={form} name="description" />
         <Button type="submit" className="w-full" disabled={loading}>

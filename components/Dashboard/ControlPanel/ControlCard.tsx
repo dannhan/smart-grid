@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { Room } from "@/types";
+import { ControlledRoom } from "@/types";
 
 import { cn } from "@/lib/utils";
 import {
@@ -17,7 +17,7 @@ import Lamp from "@/components/Icon/Lamp";
 
 interface ControlCardProps {
   roomId: string;
-  room: Room;
+  room: ControlledRoom;
   className?: string;
 }
 

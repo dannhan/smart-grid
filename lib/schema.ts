@@ -10,34 +10,30 @@ const DocumentReferenceType = z.custom<DocumentReference>(
 );
 
 export const baseHistorySchema = z.object({
-  // component-ref might not be used
-  "component-ref": DocumentReferenceType,
-  "component-name": z.string(),
-  date: z.string().or(TimestampType),
+  image: z.object({
+    url: z.string(),
+    key: z.string(),
+  }),
   description: z.string(),
-  image: z.string(),
+  date: z.string().or(TimestampType),
+  componentRef: DocumentReferenceType,
+  componentName: z.string(),
 });
 
 const repairSchema = baseHistorySchema.extend({
-  "action-type": z.literal("Repair"),
-  "technical-specification": z.undefined(), // Must be undefined
+  actionType: z.literal("repair"),
+  technicalSpecification: z.undefined(), // Must be undefined
 });
 
-const nonRepairSchema = baseHistorySchema.extend({
-  "action-type": z.literal("Replacement"),
-  "technical-specification": z.array(z.record(z.string(), z.string())),
+const replacementSchema = baseHistorySchema.extend({
+  actionType: z.literal("replacement"),
+  technicalSpecification: z.array(z.record(z.string(), z.string())),
 });
 
-// TODO: handle other action type
-export const repairHistorySchema = z.discriminatedUnion("action-type", [
+export const repairHistorySchema = z.discriminatedUnion("actionType", [
   repairSchema,
-  nonRepairSchema,
+  replacementSchema,
 ]);
-
-// TODO: might change image to be an object that contain the properties of the image
-export type RepairHistory = z.infer<typeof repairHistorySchema> & {
-  imageKey?: string;
-};
 
 export const userSchema = z.object({
   id: z.string(),
@@ -45,8 +41,8 @@ export const userSchema = z.object({
   password: z.string().min(5).max(128),
   image: z
     .object({
-      imageUrl: z.string(),
-      imageKey: z.string(),
+      url: z.string(),
+      key: z.string(),
     })
     .optional(),
   role: z.enum(["user", "admin"]), // Example role for scalability
