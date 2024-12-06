@@ -16,6 +16,8 @@ import LampChangeForm from "@/components/Forms/LampChangeForm";
 import SocketChangeForm from "@/components/Forms/SocketChangeForm";
 import WireChangeForm from "@/components/Forms/WireChangeForm";
 
+import { formatKebabCase } from "@/lib/utils";
+
 // TODO: searchParams and route type safety
 interface Props {
   params: { component: string; room: string };
@@ -35,7 +37,7 @@ const ComponentChangePage: NextPage<Props> = ({ params, searchParams }) => {
       <Card className="flex min-h-96 w-full flex-col items-center justify-between rounded-xl">
         <CardHeader className="relative w-full text-center">
           <CardTitle className="capitalize">
-            {`${component.replace(/-/g, " ")} ${action}`}
+            {`${formatKebabCase(component)} ${action}`}
           </CardTitle>
           <Link
             href={`/dashboard/management/${room}`}

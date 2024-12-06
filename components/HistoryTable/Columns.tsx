@@ -7,6 +7,8 @@ import { ImageIcon } from "lucide-react";
 import type { RepairHistory } from "@/types";
 import { Badge } from "@/components/shadcn/badge";
 
+import { formatCamelCase } from "@/lib/utils";
+
 export const columns: ColumnDef<RepairHistory>[] = [
   {
     accessorKey: "date",
@@ -39,8 +41,7 @@ export const columns: ColumnDef<RepairHistory>[] = [
         <ul>
           {properties.map((obj, index) => (
             <li key={index} className="capitalize leading-4">
-              {Object.keys(obj)[0].replace("-", " ")}:{" "}
-              {Object.values(obj)[0].replace("-", " ")}
+              {formatCamelCase(Object.keys(obj)[0])}: {Object.values(obj)[0]}
             </li>
           ))}
         </ul>

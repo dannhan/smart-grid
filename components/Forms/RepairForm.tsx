@@ -20,8 +20,9 @@ import { revalidateHistory } from "@/actions/revalidateHistory";
 import type { RepairHistory } from "@/types";
 import { repairHistorySchema } from "@/lib/schema";
 import { firestore } from "@/lib/firebase/database";
-import { formatName } from "@/lib/utils";
 import { uploadFiles } from "@/lib/uploadthing";
+
+import { formatKebabCase } from "@/lib/utils";
 
 // TODO: allow only image to be uploaded!
 const formSchema = z.object({
@@ -64,7 +65,7 @@ const RepairForm: React.FC<Props> = ({ componentId }) => {
       const data: RepairHistory = {
         actionType: "repair",
         date: Timestamp.now(),
-        componentName: formatName(componentId),
+        componentName: formatKebabCase(componentId),
         componentRef: doc(firestore, "components", componentId),
         image: {
           url: uploadedFiles[0].url,

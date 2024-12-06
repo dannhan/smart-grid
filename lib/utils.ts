@@ -10,13 +10,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// TODO: use this more
-export function formatName(sentence: string) {
-  return sentence
-    .replace(/-/g, " ")
-    .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
-}
-
 // Configuration for CSV export
 const csvConfig = mkConfig({
   fieldSeparator: ",",
@@ -56,6 +49,12 @@ export function exportExcel(rows: Row<RepairHistory>[]) {
 
   const csv = generateCsv(csvConfig)(rowData);
   download(csvConfig)(csv);
+}
+
+export function formatKebabCase(input: string) {
+  return input
+    .replace(/-/g, " ")
+    .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 }
 
 export function formatCamelCase(input: string) {
