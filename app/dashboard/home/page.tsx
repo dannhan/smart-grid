@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import SensorStatus from "@/components/Dashboard/SensorStatus";
+import PowerConsumptionChart from "@/components/Dashboard/MonitorChart/PowerConsumptionChart";
 
 const DashboardPage: FC = () => {
   return (
@@ -27,6 +28,9 @@ const DashboardPage: FC = () => {
       <section>
         <h3 className="pb-4 pt-1 font-semibold sm:hidden">Monitoring</h3>
         <SensorStatus />
+      </section>
+      <section>
+        <PowerConsumptionChart />
       </section>
     </main>
   );
