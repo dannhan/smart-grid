@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import fs from "fs/promises";
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   const htmlContent = await fs.readFile(
     process.cwd() + "/static/ar.html",
     "utf-8",

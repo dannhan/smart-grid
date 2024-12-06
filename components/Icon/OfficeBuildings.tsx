@@ -1,6 +1,5 @@
 import * as React from "react";
 
-// TODO: icon
 const OfficeBuildings: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

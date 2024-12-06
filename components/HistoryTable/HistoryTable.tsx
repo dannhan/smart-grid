@@ -31,7 +31,6 @@ import { Pdf, Csv } from "@/components/Icon";
 
 import type { RepairHistory } from "@/types";
 
-// TODO: this type is very wrong
 interface HistoryTableProps {
   columns: ColumnDef<RepairHistory>[];
   data: RepairHistory[];
@@ -64,9 +63,9 @@ const HistoryTable = ({ columns, data }: HistoryTableProps) => {
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                   </TableHead>
                 );
               })}
@@ -85,14 +84,10 @@ const HistoryTable = ({ columns, data }: HistoryTableProps) => {
                     key={cell.id}
                     className={cn(
                       "border-2 border-primary text-center",
-                      // TODO: change month to only contain three letters
                       cell.column.id === "date" && "min-w-[94px]",
-                      // cell.column.id === "name" && "min-w-24",
-                      // cell.column.id === "action_type" && "min-w-[100px]",
-                      // TODO: reduce the width of description column
                       cell.column.id === "description" && "min-w-[80px]",
                       cell.column.id === "technical-specification" &&
-                      "min-w-[80px]",
+                        "min-w-[80px]",
                       cell.column.id === "image" && "min-w-[90px]",
                     )}
                   >

@@ -25,6 +25,8 @@ const ElectricalComponentCard: React.FC<Props> = async ({
   roomId,
   docReference,
 }) => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const componentSnap = await getDoc(docReference);
   const { id, name, type, properties } = {
     id: componentSnap.id,

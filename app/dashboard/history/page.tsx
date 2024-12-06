@@ -43,11 +43,9 @@ const HistoryPage: FC = async () => {
       };
     }
 
-    // TODO: better error handling
     console.log(parsed.error.format());
   });
 
-  // TODO: this type is very wrong
   const data = (await Promise.all(promises)) as RepairHistory[];
 
   return (

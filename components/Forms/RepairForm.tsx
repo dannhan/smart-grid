@@ -39,9 +39,6 @@ interface Props {
   componentId: string;
 }
 
-// TODO:
-// redirect after uploading
-// handle file upload
 const RepairForm: React.FC<Props> = ({ componentId }) => {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();

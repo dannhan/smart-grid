@@ -15,7 +15,6 @@ import DashboardSideinfoContent from "./DashboardSideinfoContent";
 const DashboardSideinfo: React.FC = () => {
   return (
     <aside className="sticky top-16 hidden h-[calc(100svh-4rem)] w-full min-w-48 max-w-[304px] py-8 pr-2 lg:block">
-      {/* TODO: is scrollarea necessary? */}
       <ScrollArea className="mb-1 h-full w-full flex-col rounded-md pr-2">
         <Card className="min-h-72">
           <CardHeader>

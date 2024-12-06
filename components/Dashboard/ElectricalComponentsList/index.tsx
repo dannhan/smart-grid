@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import { doc, getDoc } from "firebase/firestore";
 
 import type { Room } from "@/types";
-import { Skeleton } from "@/components/shadcn/skeleton";
 import { firestore } from "@/lib/firebase/database";
 
 import ElectricalComponentCard from "./ElectricalComponentCard";
+import ElectricalComponentCardSkeleton from "./ElectricalComponentCardSkeleton";
 
 interface Props {
   roomId: string;
@@ -20,11 +20,10 @@ const ElectricalComponentsList: React.FC<Props> = async ({ roomId }) => {
   // Fetch all the document from componentRefs
   const roomData = roomSnap.data() as Room;
 
-  // TODO: better skeleton ui
   return roomData.componentRefs.map((compRef) => (
     <React.Suspense
       key={compRef.id}
-      fallback={<Skeleton className="h-[447px] rounded-xl bg-card shadow" />}
+      fallback={<ElectricalComponentCardSkeleton compId={compRef.id} />}
     >
       <ElectricalComponentCard
         key={compRef.id}

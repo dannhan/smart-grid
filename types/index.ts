@@ -7,7 +7,13 @@ export type {
   RawMetricsData,
   ProcessedMetricsData,
 } from "./metric";
-export type { Component } from "./component";
+export type {
+  LampComponent,
+  SocketComponent,
+  MCBComponent,
+  WireComponent,
+  Component,
+} from "./component";
 
 /* Zod generated types */
 import * as z from "zod";

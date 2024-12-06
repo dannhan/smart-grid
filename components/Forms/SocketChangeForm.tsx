@@ -45,8 +45,7 @@ const formSchema = z.object({
   voltage: z.string().min(1),
   maxCurrent: z.string().min(1),
   warranty: z.coerce.date(),
-  // TODO: is optional a better way?
-  description: z.string().min(0),
+  description: z.string().min(1),
 });
 
 interface Props {

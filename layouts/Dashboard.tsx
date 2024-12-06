@@ -4,10 +4,10 @@ import { lazy, type FC, type PropsWithChildren } from "react";
 import { redirect, usePathname } from "next/navigation";
 
 // TODO: improve
-//
 import { useWindowSize } from "@/hooks/useWindowSize";
 import LoadingOverlay from "@/components/Common/LoadingOverlay";
 
+const MobileNav = lazy(() => import("@/components/MobileNav"));
 const DashboardHeader = lazy(
   () => import("@/components/Dashboard/DashboardHeader"),
 );
@@ -17,7 +17,6 @@ const DashboardSidenav = lazy(
 const DashboardSideinfo = lazy(
   () => import("@/components/Dashboard/DashboardSideinfo"),
 );
-const MobileNav = lazy(() => import("@/components/MobileNav"));
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const windowSize = useWindowSize();
