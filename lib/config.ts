@@ -9,10 +9,7 @@ import {
 
 import type { ChartConfig } from "@/components/shadcn/chart";
 
-import Amperemeter from "@/components/Icon/Amperemeter";
-import Flame from "@/components/Icon/Flame";
-import Smoke from "@/components/Icon/Smoke";
-import Voltmeter from "@/components/Icon/Voltmeter";
+import { Amperemeter, Flame, Smoke, Voltmeter } from "@/components/Icon";
 
 export const sidenavItems = [
   {

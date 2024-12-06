@@ -12,8 +12,7 @@ import {
 import { Switch } from "@/components/shadcn/switch";
 
 import { useControlContext } from "@/providers/ControlProvider";
-import Socket from "@/components/Icon/Socket";
-import Lamp from "@/components/Icon/Lamp";
+import { Socket, Lamp } from "@/components/Icon";
 
 interface ControlCardProps {
   roomId: string;

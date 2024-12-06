@@ -7,10 +7,7 @@ import { Measurement } from "@/types";
 
 import useRealtimeList from "@/hooks/useRealtimeList";
 import useRealtimeObject from "@/hooks/useReatimeObject";
-import Smoke from "@/components/Icon/Smoke";
-import Flame from "@/components/Icon/Flame";
-import Voltmeter from "@/components/Icon/Voltmeter";
-import Amperemeter from "@/components/Icon/Amperemeter";
+import { Smoke, Flame, Voltmeter, Amperemeter } from "@/components/Icon";
 import SensorStatusCard from "./SensorStatusCard";
 
 import { database } from "@/lib/firebase/database";

@@ -10,8 +10,8 @@ import {
 import { Switch } from "@/components/shadcn/switch";
 
 import { useControlContext } from "@/providers/ControlProvider";
-import Touch from "@/components/Icon/Touch";
-import { Skeleton } from "../shadcn/skeleton";
+import { Skeleton } from "@/components/shadcn/skeleton";
+import { Touch } from "@/components/Icon";
 
 const DashboardSideinfoQuickaccess: FC = () => {
   const { rooms, loading, error, toggleSwitch } = useControlContext();

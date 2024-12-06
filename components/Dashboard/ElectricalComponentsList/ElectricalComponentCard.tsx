@@ -12,10 +12,7 @@ import {
   CardFooter,
 } from "@/components/shadcn/card";
 import { Button } from "@/components/shadcn/button";
-import Lamp from "@/components/Icon/Lamp";
-import Socket from "@/components/Icon/Socket";
-import Wire from "@/components/Icon/Wire";
-import MCB from "@/components/Icon/MCB";
+import { Lamp, Socket, Wire, MCB } from "@/components/Icon";
 
 import { formatCamelCase } from "@/lib/utils";
 

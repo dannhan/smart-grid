@@ -1,5 +1,3 @@
-// WARN: don't push this
-
 export { default as Amperemeter } from "./Amperemeter";
 export { default as Csv } from "./Csv";
 export { default as Flame } from "./Flame";

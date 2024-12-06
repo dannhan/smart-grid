@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import OfficeBuildings from "@/components/Icon/OfficeBuildings";
+import { OfficeBuildings } from "@/components/Icon";
 
 // TODO: use data from firebase instead
 import { rooms } from "@/lib/config";
